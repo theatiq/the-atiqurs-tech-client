@@ -15,6 +15,8 @@ const AddBlog = () => {
     const longDescription = e.target.longDescription.value;
     const postedDate = e.target.postedDate.value;
     const email = e.target.email.value;
+    const postedBy = user.displayName;
+    const postedByPhoto = user.photoURL;
 
     const newPost = {
       title,
@@ -24,6 +26,8 @@ const AddBlog = () => {
       longDescription,
       postedDate,
       email,
+      postedBy,
+      postedByPhoto,
     };
 
     // send data to the server and database
