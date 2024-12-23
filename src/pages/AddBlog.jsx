@@ -25,7 +25,6 @@ const AddBlog = () => {
       postedDate,
       email,
     };
-    console.log(newPost);
 
     // send data to the server and database
     fetch("http://localhost:5000/addPost", {

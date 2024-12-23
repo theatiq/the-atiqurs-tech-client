@@ -20,7 +20,7 @@ import AllBlogs from "../pages/AllBlogs";
 import BlogDetails from "../pages/BlogDetails";
 import MyBlogs from "../pages/MyBlogs";
 import UpdateBlog from "../pages/UpdateBlog";
-import MyWatchList from "../pages/MyWatchList";
+import MyWishList from "../pages/MyWishList";
 
 const router = createBrowserRouter([
   {
@@ -61,10 +61,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/myWatchList",
+        path: "/myWishList",
         element: (
           <PrivateRoute>
-            <MyWatchList></MyWatchList>
+            <MyWishList></MyWishList>
           </PrivateRoute>
         ),
       },

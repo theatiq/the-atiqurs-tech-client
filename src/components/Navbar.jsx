@@ -48,7 +48,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/myWatchList"} className="hover:text-teal-400">
+            <NavLink to={"/myWishList"} className="hover:text-teal-400">
               Wishlist
             </NavLink>
           </li>

@@ -3,15 +3,15 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
 
-const MyWatchList = () => {
+const MyWishList = () => {
   const { user } = useContext(AuthContext);
-  const [myWatchList, setMyWatchList] = useState([]);
+  const [myWishList, setMyWishList] = useState([]);
   const email = user.email;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myWatchList?email=${email}`)
+    fetch(`http://localhost:5000/myWishList?email=${email}`)
       .then((res) => res.json())
-      .then((data) => setMyWatchList(data));
+      .then((data) => setMyWishList(data));
   }, [email]);
 
   const handleDeleteWatchList = (_id) => {
@@ -25,17 +25,17 @@ const MyWatchList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/watchList/${_id}`, {
+        fetch(`http://localhost:5000/wishList/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "The item has been removed.", "success");
-              const remainingWatchList = myWatchList.filter(
+              const remainingWatchList = myWishList.filter(
                 (watch) => watch._id !== _id
               );
-              setMyWatchList(remainingWatchList);
+              setMyWishList(remainingWatchList);
             }
           });
       }
@@ -45,7 +45,7 @@ const MyWatchList = () => {
   return (
     <div className="p-5">
       <h2 className="text-3xl font-bold text-center mb-5">
-        My Watch List ({myWatchList.length})
+        My Watch List ({myWishList.length})
       </h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
@@ -64,23 +64,27 @@ const MyWatchList = () => {
 
           {/* Table Body */}
           <tbody>
-            {myWatchList.map((watch, index) => (
-              <tr key={watch._id} className="text-center hover:bg-gray-100">
+            {myWishList.map((wish, index) => (
+              <tr key={wish._id} className="text-center hover:bg-gray-100">
                 <td className="p-3 border border-gray-300">{index + 1}</td>
                 <td className="p-3 border border-gray-300">
                   <img
-                    src={watch.image}
-                    alt={watch.title}
+                    src={wish.image}
+                    alt={wish.title}
                     className="w-10 h-10 rounded-full mx-auto"
                   />
                 </td>
-                <td className="p-3 border border-gray-300">{watch.title}</td>
-                <td className="p-3 border border-gray-300">{watch.rating}</td>
-                <td className="p-3 border border-gray-300">{watch.year}</td>
-                <td className="p-3 border border-gray-300">{watch.genres}</td>
+                <td className="p-3 border border-gray-300">{wish.title}</td>
+                <td className="p-3 border border-gray-300">
+                  {wish.shortDescription}
+                </td>
+                <td className="p-3 border border-gray-300">{wish.category}</td>
+                <td className="p-3 border border-gray-300">
+                  {wish.postedDate}
+                </td>
                 <td className="p-3 border border-gray-300">
                   <button
-                    onClick={() => handleDeleteWatchList(watch._id)}
+                    onClick={() => handleDeleteWatchList(wish._id)}
                     className="btn btn-sm bg-red-500 text-white hover:bg-red-600 flex items-center px-2 py-1 rounded"
                     title="Delete from Watch List"
                   >
@@ -96,4 +100,4 @@ const MyWatchList = () => {
   );
 };
 
-export default MyWatchList;
+export default MyWishList;
