@@ -5,7 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 const AddReview = () => {
   const { user, setUser, logOut, createUserGoogle } = useContext(AuthContext);
 
-  const handleAddReview = (e) => {
+  const handleAddBlog = (e) => {
     e.preventDefault();
 
     const title = e.target.title.value;
@@ -53,11 +53,13 @@ const AddReview = () => {
   return (
     <div className="lg:w-3/4 mx-auto">
       <div className="text-center p-10">
-        <h1 className="text-3xl font-bold">Add Your Review</h1>
-        <p className="py-6">You can add your valuable reviews here.</p>
+        <h1 className="text-3xl font-bold">Create a New Blog</h1>
+        <p className="py-6">
+          Here you have the horizon to create your creative blog posts.
+        </p>
       </div>
       <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
-        <form onSubmit={handleAddReview} className="card-body">
+        <form onSubmit={handleAddBlog} className="card-body">
           {/* form first row */}
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
@@ -67,42 +69,73 @@ const AddReview = () => {
               <input
                 type="text"
                 name="title"
-                placeholder="title of the game"
+                placeholder="title of the blog"
                 className="input input-bordered"
                 required
               />
             </div>
             <div className="form-control flex-1">
               <label className="label">
-                <span className="label-text">Review</span>
+                <span className="label-text">Blog Image</span>
               </label>
               <input
                 type="text"
-                name="review"
-                placeholder="review"
+                name="image"
+                placeholder="Blog Image"
                 className="input input-bordered"
                 required
               />
             </div>
           </div>
+
           {/* form second row */}
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
               <label className="label">
-                <span className="label-text">Rating</span>
+                <span className="label-text">Category</span>
               </label>
-              <select name="rating" className="select select-bordered" required>
+              <select
+                name="category"
+                className="select select-bordered"
+                required
+              >
                 <option value="" disabled selected>
-                  Select a rating
+                  Select a Category
                 </option>
-                {[1, 2, 3, 4, 5].map((rating) => (
-                  <option key={rating} value={rating}>
-                    {rating}
-                  </option>
-                ))}
+                <option value="action">Tech News & Trends</option>
+                <option value="rpg">Programming & Development</option>
+                <option value="adventure">Gadgets & Reviews</option>
+                <option value="strategy"> How-To Guides & Tutorials</option>
+                <option value="sports">Future of Tech</option>
               </select>
             </div>
             <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Short Description</span>
+              </label>
+              <input
+                type="text"
+                name="shortDescription"
+                placeholder="Enter your short description here..."
+                className="input input-bordered"
+                required
+              />
+            </div>
+          </div>
+          {/* form third row */}
+          <div className="flex flex-col lg:flex-row gap-5">
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Long Description</span>
+              </label>
+              <textarea
+                name="longDescription"
+                placeholder="Enter your long description here..."
+                className="textarea textarea-bordered h-40"
+                required
+              ></textarea>
+            </div>
+            {/* <div className="form-control flex-1">
               <label className="label">
                 <span className="label-text">Publishing Year</span>
               </label>
@@ -119,40 +152,24 @@ const AddReview = () => {
                   );
                 })}
               </select>
-            </div>
+            </div> */}
           </div>
-          {/* form third row */}
+
+          {/* form fourth row */}
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
               <label className="label">
-                <span className="label-text">Genres</span>
-              </label>
-              <select name="genres" className="select select-bordered" required>
-                <option value="" disabled selected>
-                  Select a genre
-                </option>
-                <option value="action">Action</option>
-                <option value="rpg">RPG</option>
-                <option value="adventure">Adventure</option>
-                <option value="strategy">Strategy</option>
-                <option value="sports">Sports</option>
-              </select>
-            </div>
-            <div className="form-control flex-1">
-              <label className="label">
-                <span className="label-text">Game Cover Image</span>
+                <span className="label-text">Posted Date</span>
               </label>
               <input
                 type="text"
-                name="image"
-                placeholder="Game Cover Image"
+                name="postedDate"
+                value={new Date().toLocaleString()}
+                placeholder="Posted Date"
                 className="input input-bordered"
-                required
+                disabled
               />
             </div>
-          </div>
-          {/* form fourth row */}
-          <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
               <label className="label">
                 <span className="label-text">User's Email</span>
@@ -163,26 +180,13 @@ const AddReview = () => {
                 value={user?.email}
                 placeholder="user's email"
                 className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control flex-1">
-              <label className="label">
-                <span className="label-text">User's Name</span>
-              </label>
-              <input
-                type="text"
-                name="userName"
-                value={user?.displayName}
-                placeholder="User's Name"
-                className="input input-bordered"
-                required
+                disabled
               />
             </div>
           </div>
 
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Add A Review</button>
+            <button className="btn btn-primary">Create A Blog</button>
           </div>
         </form>
       </div>
