@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
 
-const AddReview = () => {
+const AddBlog = () => {
   const { user, setUser, logOut, createUserGoogle } = useContext(AuthContext);
 
   const handleAddBlog = (e) => {
@@ -46,7 +46,7 @@ const AddReview = () => {
           });
           e.target.reset();
         }
-    });
+      });
   };
 
   return (
@@ -180,4 +180,4 @@ const AddReview = () => {
   );
 };
 
-export default AddReview;
+export default AddBlog;

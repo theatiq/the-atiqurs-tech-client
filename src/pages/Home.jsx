@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import DarkModeToggle from "react-dark-mode-toggle";
 import { Typewriter } from "react-simple-typewriter";
 
-import Review from "./Review";
+import Blog from "./Blog";
 import Swal from "sweetalert2";
 
 const Home = () => {
@@ -55,7 +55,7 @@ const Home = () => {
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5 p-5">
         {allReviews.map((review) => (
           <div key={review._id} className="">
-            <Review reviews={review} />
+            <Blog reviews={review} />
           </div>
         ))}
       </div>

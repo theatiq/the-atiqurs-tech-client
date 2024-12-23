@@ -1,43 +1,43 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import Review from "./Review";
+import Blog from "./Blog";
 
-const AllReviews = () => {
-  const allReviews = useLoaderData();
-  const [filteredReviews, setFilteredReviews] = useState(allReviews);
+const AllBlogs = () => {
+  const allBlogs = useLoaderData();
+  const [filteredBlogs, setFilteredBlogs] = useState(allBlogs);
   const [sortOption, setSortOption] = useState("");
   const [genreFilter, setGenreFilter] = useState("");
 
   // Sort Functionality
   const handleSort = (option) => {
     setSortOption(option);
-    const sortedReviews = [...filteredReviews].sort((a, b) => {
+    const sortedBlogs = [...filteredBlogs].sort((a, b) => {
       if (option === "rating-asc") return a.rating - b.rating;
       if (option === "rating-desc") return b.rating - a.rating;
       if (option === "year-asc") return a.year - b.year;
       if (option === "year-desc") return b.year - a.year;
       return 0;
     });
-    setFilteredReviews(sortedReviews);
+    setFilteredBlogs(sortedBlogs);
   };
 
   // Filter Functionality
   const handleFilter = (genre) => {
     setGenreFilter(genre);
     if (genre === "all") {
-      setFilteredReviews(allReviews); // Reset to all reviews
+      setFilteredBlogs(allBlogs); // Reset to all reviews
     } else {
-      const filtered = allReviews.filter((review) =>
+      const filtered = allBlogs.filter((review) =>
         review.genres.toLowerCase().includes(genre.toLowerCase())
       );
-      return setFilteredReviews(filtered);
+      return setFilteredBlogs(filtered);
     }
   };
 
   return (
     <div className="p-5">
       <h1 className="text-center text-3xl font-bold text-blue-950 mb-5">
-        All Reviews
+        All Blog Posts
       </h1>
 
       {/* Dropdown Menus */}
@@ -83,12 +83,12 @@ const AllReviews = () => {
 
       {/* Reviews Grid */}
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filteredReviews.map((review) => (
-          <Review key={review._id} reviews={review}></Review>
+        {filteredBlogs.map((blog) => (
+          <Blog key={blog._id} blogs={blog}></Blog>
         ))}
       </div>
     </div>
   );
 };
 
-export default AllReviews;
+export default AllBlogs;

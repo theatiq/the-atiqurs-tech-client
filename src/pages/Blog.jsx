@@ -2,9 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 
-const Review = ({ reviews }) => {
+const Blog = ({ blogs }) => {
   const { _id, title, review, rating, year, genres, image, email, userName } =
-    reviews;
+    blogs;
 
   return (
     <div className="card bg-base-100 border-1 review-card">
@@ -39,4 +39,4 @@ const Review = ({ reviews }) => {
   );
 };
 
-export default Review;
+export default Blog;

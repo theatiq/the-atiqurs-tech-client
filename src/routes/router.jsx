@@ -15,8 +15,8 @@ import Letter from "../pages/Letter";
 import Fest from "../pages/Fest";
 import Forget from "../pages/Forget";
 import UpdateProfile from "../pages/UpdateProfile";
-import AddReview from "../pages/AddReview";
-import AllReviews from "../pages/AllReviews";
+import AddBlog from "../pages/AddBlog";
+import AllBlogs from "../pages/AllBlogs";
 import ReviewDetails from "../pages/ReviewDetails";
 import MyBlogs from "../pages/MyBlogs";
 import UpdateBlog from "../pages/UpdateBlog";
@@ -33,13 +33,13 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:5000/reviewsHome"),
       },
       {
-        path: "/addReview",
-        element: <AddReview></AddReview>,
+        path: "/addBlog",
+        element: <AddBlog></AddBlog>,
       },
       {
-        path: "/allReviews",
-        element: <AllReviews></AllReviews>,
-        loader: () => fetch("http://localhost:5000/reviews"),
+        path: "/allBlogs",
+        element: <AllBlogs></AllBlogs>,
+        loader: () => fetch("http://localhost:5000/blogs"),
       },
 
       {

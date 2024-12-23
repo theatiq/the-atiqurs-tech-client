@@ -26,14 +26,14 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/allReviews"} className="hover:text-teal-400">
+        <NavLink to={"/allBlogs"} className="hover:text-teal-400">
           All Blogs
         </NavLink>
       </li>
       {user && (
         <>
           <li>
-            <NavLink to={"/addReview"} className="hover:text-teal-400">
+            <NavLink to={"/addBlog"} className="hover:text-teal-400">
               Add Blog
             </NavLink>
           </li>
