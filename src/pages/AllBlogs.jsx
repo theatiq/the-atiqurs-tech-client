@@ -84,7 +84,7 @@ const AllBlogs = () => {
       {/* Reviews Grid */}
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredBlogs.map((blog) => (
-          <Blog key={blog._id} blogs={blog}></Blog>
+          <Blog key={blog._id} reviews={blog}></Blog>
         ))}
       </div>
     </div>

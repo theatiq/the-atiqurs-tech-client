@@ -2,9 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 
-const Blog = ({ blogs }) => {
+const Blog = ({ reviews }) => {
   const { _id, title, review, rating, year, genres, image, email, userName } =
-    blogs;
+    reviews;
 
   return (
     <div className="card bg-base-100 border-1 review-card">
@@ -32,7 +32,7 @@ const Blog = ({ blogs }) => {
         <p>Publishing Year: {year}</p>
       </div>
 
-      <NavLink to={`/review/${_id}`} className="btn mb-5 mx-5">
+      <NavLink to={`/blogs/${_id}`} className="btn mb-5 mx-5">
         Explore Details
       </NavLink>
     </div>

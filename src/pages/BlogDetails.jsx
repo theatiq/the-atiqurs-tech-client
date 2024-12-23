@@ -8,60 +8,57 @@ import Swal from "sweetalert2";
 // import { CopyToClipboard } from "react-copy-to-clipboard";
 // import toast from "react-hot-toast";
 
-const ReviewDetails = () => {
+const BlogDetails = () => {
   const { user, setUser, logOut, createUserGoogle } = useContext(AuthContext);
-  const reviews = useLoaderData();
+  const blogs = useLoaderData();
+  console.log(blogs);
   const { id } = useParams();
-  const { _id, title, review, rating, year, genres, image } = reviews;
+  const { _id, title } = blogs;
   const email = user.email;
   const userName = user.displayName;
 
-  const watchList = {
-    _id,
-    title,
-    review,
-    rating,
-    year,
-    genres,
-    image,
-    email,
-    userName,
-  };
-  //   const [brand, setBrand] = useState(null);
+  // const watchList = {
+  //   _id,
+  //   title,
+  //   review,
+  //   rating,
+  //   year,
+  //   genres,
+  //   image,
+  //   email,
+  //   userName,
+  // };
 
-  //   useEffect(() => {
-  //     const singleBrand = allBrands.find((brand) => brand.id === id);
-  //     setBrand(singleBrand);
-  //   }, [id, allBrands]);
-  const handleAddWatchList = () => {
-    fetch("http://localhost:5000/watchList", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(watchList),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            title: "Success!",
-            text: "Successfully added to Watch List",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
-        }
-      });
-  };
+  // const handleAddWatchList = () => {
+  //   fetch("http://localhost:5000/watchList", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(watchList),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.insertedId) {
+  //         Swal.fire({
+  //           title: "Success!",
+  //           text: "Successfully added to Watch List",
+  //           icon: "success",
+  //           confirmButtonText: "Ok",
+  //         });
+  //       }
+  //     });
+  // };
 
-  if (!review) return <Loading></Loading>;
+  // if (!review) return <Loading></Loading>;
 
   return (
     <div>
       <header>
         <Navbar />
       </header>
-      <main className="w-11/12 mx-auto mt-10 my-10">
+      <h1>{title}</h1>
+      {/* <main className="w-11/12 mx-auto mt-10 my-10">
         <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
           <div className="lg:flex items-center mb-5">
             <img
@@ -86,7 +83,7 @@ const ReviewDetails = () => {
             </div>
           </div>
         </div>
-      </main>
+      </main> */}
       <footer>
         <Footer />
       </footer>
@@ -94,4 +91,4 @@ const ReviewDetails = () => {
   );
 };
 
-export default ReviewDetails;
+export default BlogDetails;

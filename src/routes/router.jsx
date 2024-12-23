@@ -17,7 +17,7 @@ import Forget from "../pages/Forget";
 import UpdateProfile from "../pages/UpdateProfile";
 import AddBlog from "../pages/AddBlog";
 import AllBlogs from "../pages/AllBlogs";
-import ReviewDetails from "../pages/ReviewDetails";
+import BlogDetails from "../pages/BlogDetails";
 import MyBlogs from "../pages/MyBlogs";
 import UpdateBlog from "../pages/UpdateBlog";
 import MyWatchList from "../pages/MyWatchList";
@@ -106,13 +106,13 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/review/:id",
+    path: "/blogs/:id",
     element: (
       <PrivateRoute>
-        <ReviewDetails></ReviewDetails>
+        <BlogDetails></BlogDetails>
       </PrivateRoute>
     ),
-    loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`),
+    loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`),
   },
 
   {
