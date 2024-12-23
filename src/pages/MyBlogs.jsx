@@ -6,16 +6,16 @@ import { MdDelete, MdOutlineSecurityUpdateGood } from "react-icons/md";
 
 const MyBlogs = () => {
   const { user } = useContext(AuthContext);
-  const [myReviews, setMyReviews] = useState([]);
+  const [myBlogs, setMyBlogs] = useState([]);
   const email = user.email;
 
   useEffect(() => {
     fetch(`http://localhost:5000/myReviews?email=${email}`)
       .then((res) => res.json())
-      .then((data) => setMyReviews(data));
+      .then((data) => setMyBlogs(data));
   }, [email]);
 
-  const handleDeleteReview = (_id) => {
+  const handleDeleteBlog = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -26,17 +26,17 @@ const MyBlogs = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/review/${_id}`, {
+        fetch(`http://localhost:5000/blog/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Your review has been deleted.", "success");
-              const remainingReviews = myReviews.filter(
+              Swal.fire("Deleted!", "Your blog has been deleted.", "success");
+              const remainingBlogs = myBlogs.filter(
                 (review) => review._id !== _id
               );
-              setMyReviews(remainingReviews);
+              setMyBlogs(remainingBlogs);
             }
           });
       }
@@ -46,7 +46,7 @@ const MyBlogs = () => {
   return (
     <div className="p-5">
       <h2 className="text-3xl font-bold text-center mb-5">
-        My Blogs ({myReviews.length})
+        My Blogs ({myBlogs.length})
       </h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
@@ -65,7 +65,7 @@ const MyBlogs = () => {
 
           {/* Table Body */}
           <tbody>
-            {myReviews.map((review, index) => (
+            {myBlogs.map((review, index) => (
               <tr key={review._id} className="text-center hover:bg-gray-100">
                 <td className="p-3 border border-gray-300">{index + 1}</td>
                 <td className="p-3 border border-gray-300">
@@ -89,7 +89,7 @@ const MyBlogs = () => {
                     </button>
                   </NavLink>
                   <button
-                    onClick={() => handleDeleteReview(review._id)}
+                    onClick={() => handleDeleteBlog(review._id)}
                     className="btn btn-sm bg-red-500 text-white hover:bg-red-600 flex items-center px-2 py-1 rounded"
                     title="Delete Review"
                   >
