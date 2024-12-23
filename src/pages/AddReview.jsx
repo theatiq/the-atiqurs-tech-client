@@ -9,32 +9,31 @@ const AddReview = () => {
     e.preventDefault();
 
     const title = e.target.title.value;
-    const review = e.target.review.value;
-    const rating = e.target.rating.value;
-    const year = e.target.year.value;
-    const genres = e.target.genres.value;
     const image = e.target.image.value;
+    const category = e.target.category.value;
+    const shortDescription = e.target.shortDescription.value;
+    const longDescription = e.target.longDescription.value;
+    const postedDate = e.target.postedDate.value;
     const email = e.target.email.value;
-    const userName = e.target.userName.value;
 
-    const newReview = {
+    const newPost = {
       title,
-      review,
-      rating,
-      year,
-      genres,
       image,
+      category,
+      shortDescription,
+      longDescription,
+      postedDate,
       email,
-      userName,
     };
+    console.log(newPost);
 
     // send data to the server and database
-    fetch("http://localhost:5000/addReview", {
+    fetch("http://localhost:5000/addPost", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newReview),
+      body: JSON.stringify(newPost),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -47,7 +46,7 @@ const AddReview = () => {
           });
           e.target.reset();
         }
-      });
+    });
   };
 
   return (
@@ -102,11 +101,16 @@ const AddReview = () => {
                 <option value="" disabled selected>
                   Select a Category
                 </option>
-                <option value="action">Tech News & Trends</option>
-                <option value="rpg">Programming & Development</option>
-                <option value="adventure">Gadgets & Reviews</option>
-                <option value="strategy"> How-To Guides & Tutorials</option>
-                <option value="sports">Future of Tech</option>
+                <option value="Tech News & Trends">Tech News & Trends</option>
+                <option value="Programming & Development">
+                  Programming & Development
+                </option>
+                <option value="Gadgets & Reviews">Gadgets & Reviews</option>
+                <option value="How-To Guides & Tutorials">
+                  {" "}
+                  How-To Guides & Tutorials
+                </option>
+                <option value="Future of Tech">Future of Tech</option>
               </select>
             </div>
             <div className="form-control flex-1">
@@ -135,24 +139,6 @@ const AddReview = () => {
                 required
               ></textarea>
             </div>
-            {/* <div className="form-control flex-1">
-              <label className="label">
-                <span className="label-text">Publishing Year</span>
-              </label>
-              <select name="year" className="select select-bordered" required>
-                <option value="" disabled selected>
-                  Select a year
-                </option>
-                {Array.from({ length: 50 }, (_, i) => {
-                  const year = new Date().getFullYear() - i;
-                  return (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  );
-                })}
-              </select>
-            </div> */}
           </div>
 
           {/* form fourth row */}

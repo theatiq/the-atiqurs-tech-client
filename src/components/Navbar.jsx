@@ -38,6 +38,11 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink to={"/myBlogs"} className="hover:text-teal-400">
+              My Blogs
+            </NavLink>
+          </li>
+          <li>
             <NavLink to={"/myReviews"} className="hover:text-teal-400">
               Featured Blogs
             </NavLink>

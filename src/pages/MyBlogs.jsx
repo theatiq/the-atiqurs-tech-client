@@ -4,7 +4,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { NavLink } from "react-router-dom";
 import { MdDelete, MdOutlineSecurityUpdateGood } from "react-icons/md";
 
-const MyReviews = () => {
+const MyBlogs = () => {
   const { user } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
   const email = user.email;
@@ -46,7 +46,7 @@ const MyReviews = () => {
   return (
     <div className="p-5">
       <h2 className="text-3xl font-bold text-center mb-5">
-        My Reviews ({myReviews.length})
+        My Blogs ({myReviews.length})
       </h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
@@ -80,7 +80,7 @@ const MyReviews = () => {
                 <td className="p-3 border border-gray-300">{review.year}</td>
                 <td className="p-3 border border-gray-300">{review.genres}</td>
                 <td className="p-3 border border-gray-300 flex justify-center space-x-2">
-                  <NavLink to={`/updateReview/${review._id}`}>
+                  <NavLink to={`/updateBlog/${review._id}`}>
                     <button
                       className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 flex items-center px-2 py-1 rounded"
                       title="Update Review"
@@ -105,4 +105,4 @@ const MyReviews = () => {
   );
 };
 
-export default MyReviews;
+export default MyBlogs;

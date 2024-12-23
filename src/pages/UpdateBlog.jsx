@@ -3,41 +3,47 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
 import { useLoaderData } from "react-router-dom";
 
-const UpdateReview = () => {
+const UpdateBlog = () => {
   const { user, setUser, logOut, createUserGoogle } = useContext(AuthContext);
-  const reviews = useLoaderData();
-  const { _id, title, review, rating, year, genres, image, email, userName } =
-    reviews;
-  const handleAddReview = (e) => {
+  const blogs = useLoaderData();
+  const {
+    _id,
+    title,
+    image,
+    category,
+    shortDescription,
+    longDescription,
+    postedDate,
+    email,
+  } = blogs;
+  const handleUpdateBlog = (e) => {
     e.preventDefault();
 
     const title = e.target.title.value;
-    const review = e.target.review.value;
-    const rating = e.target.rating.value;
-    const year = e.target.year.value;
-    const genres = e.target.genres.value;
     const image = e.target.image.value;
+    const category = e.target.category.value;
+    const shortDescription = e.target.shortDescription.value;
+    const longDescription = e.target.longDescription.value;
+    const postedDate = e.target.postedDate.value;
     const email = e.target.email.value;
-    const userName = e.target.userName.value;
 
-    const updatedReview = {
+    const updatedBlog = {
       title,
-      review,
-      rating,
-      year,
-      genres,
       image,
+      category,
+      shortDescription,
+      longDescription,
+      postedDate,
       email,
-      userName,
     };
 
     // send data to the server and database
-    fetch(`http://localhost:5000/review/${_id}`, {
+    fetch(`http://localhost:5000/update/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(updatedReview),
+      body: JSON.stringify(updatedBlog),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -56,11 +62,11 @@ const UpdateReview = () => {
   return (
     <div className="lg:w-3/4 mx-auto">
       <div className="text-center p-10">
-        <h1 className="text-3xl font-bold">Add Your Review</h1>
-        <p className="py-6">You can add your valuable reviews here.</p>
+        <h1 className="text-3xl font-bold">Update Your Blog</h1>
+        <p className="py-6">You can update your blogs here.</p>
       </div>
       <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
-        <form onSubmit={handleAddReview} className="card-body">
+        <form onSubmit={handleUpdateBlog} className="card-body">
           {/* form first row */}
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
@@ -71,94 +77,99 @@ const UpdateReview = () => {
                 type="text"
                 name="title"
                 defaultValue={title}
-                placeholder="title of the game"
+                placeholder="title of the blog"
                 className="input input-bordered"
                 required
               />
             </div>
             <div className="form-control flex-1">
               <label className="label">
-                <span className="label-text">Review</span>
+                <span className="label-text">Blog Image</span>
               </label>
               <input
                 type="text"
-                name="review"
-                defaultValue={review}
-                placeholder="review"
+                name="image"
+                defaultValue={image}
+                placeholder="Blog Image"
                 className="input input-bordered"
                 required
               />
             </div>
           </div>
+
           {/* form second row */}
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
               <label className="label">
-                <span className="label-text">Rating</span>
+                <span className="label-text">Category</span>
               </label>
-              <select name="rating" className="select select-bordered" required>
+              <select
+                name="category"
+                defaultValue={category}
+                className="select select-bordered"
+                required
+              >
                 <option value="" disabled selected>
-                  {rating}
+                  Select a Category
                 </option>
-                {[1, 2, 3, 4, 5].map((rating) => (
-                  <option key={rating} value={rating}>
-                    {rating}
-                  </option>
-                ))}
+                <option value="Tech News & Trends">Tech News & Trends</option>
+                <option value="Programming & Development">
+                  Programming & Development
+                </option>
+                <option value="Gadgets & Reviews">Gadgets & Reviews</option>
+                <option value="How-To Guides & Tutorials">
+                  {" "}
+                  How-To Guides & Tutorials
+                </option>
+                <option value="Future of Tech">Future of Tech</option>
               </select>
             </div>
             <div className="form-control flex-1">
               <label className="label">
-                <span className="label-text">Publishing Year</span>
+                <span className="label-text">Short Description</span>
               </label>
-              <select name="year" className="select select-bordered" required>
-                <option value="" disabled selected>
-                  {year}
-                </option>
-                {Array.from({ length: 50 }, (_, i) => {
-                  const year = new Date().getFullYear() - i;
-                  return (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  );
-                })}
-              </select>
+              <input
+                type="text"
+                name="shortDescription"
+                defaultValue={shortDescription}
+                placeholder="Enter your short description here..."
+                className="input input-bordered"
+                required
+              />
             </div>
           </div>
           {/* form third row */}
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
               <label className="label">
-                <span className="label-text">Genres</span>
+                <span className="label-text">Long Description</span>
               </label>
-              <select name="genres" className="select select-bordered" required>
-                <option value="" disabled selected>
-                  {genres}
-                </option>
-                <option value="action">Action</option>
-                <option value="rpg">RPG</option>
-                <option value="adventure">Adventure</option>
-                <option value="strategy">Strategy</option>
-                <option value="sports">Sports</option>
-              </select>
+              <textarea
+                name="longDescription"
+                defaultValue={longDescription}
+                placeholder="Enter your long description here..."
+                className="textarea textarea-bordered h-40"
+                required
+              ></textarea>
             </div>
+          </div>
+
+          {/* form fourth row */}
+          <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
               <label className="label">
-                <span className="label-text">Game Cover Image</span>
+                <span className="label-text">Posted Date</span>
               </label>
               <input
                 type="text"
-                name="image"
-                defaultValue={image}
-                placeholder="Game Cover Image"
+                name="postedDate"
+                defaultValue={postedDate}
+                value={new Date().toLocaleString()}
+                placeholder="Posted Date"
                 className="input input-bordered"
-                required
+                disabled
               />
             </div>
-          </div>
-          {/* form fourth row */}
-          <div className="flex flex-col lg:flex-row gap-5">
             <div className="form-control flex-1">
               <label className="label">
                 <span className="label-text">User's Email</span>
@@ -169,30 +180,17 @@ const UpdateReview = () => {
                 value={user?.email}
                 placeholder="user's email"
                 className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control flex-1">
-              <label className="label">
-                <span className="label-text">User's Name</span>
-              </label>
-              <input
-                type="text"
-                name="userName"
-                value={user?.displayName}
-                placeholder="User's Name"
-                className="input input-bordered"
-                required
+                disabled
               />
             </div>
           </div>
 
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Update A Review</button>
+            <button className="btn btn-primary">Update Your Blog</button>
           </div>
         </form>
       </div>
     </div>
   );
 };
-export default UpdateReview;
+export default UpdateBlog;

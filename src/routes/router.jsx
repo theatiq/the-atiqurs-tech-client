@@ -18,8 +18,8 @@ import UpdateProfile from "../pages/UpdateProfile";
 import AddReview from "../pages/AddReview";
 import AllReviews from "../pages/AllReviews";
 import ReviewDetails from "../pages/ReviewDetails";
-import MyReviews from "../pages/MyReviews";
-import UpdateReview from "../pages/UpdateReview";
+import MyBlogs from "../pages/MyBlogs";
+import UpdateBlog from "../pages/UpdateBlog";
 import MyWatchList from "../pages/MyWatchList";
 
 const router = createBrowserRouter([
@@ -43,20 +43,20 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/myReviews",
+        path: "/myBlogs",
         element: (
           <PrivateRoute>
-            <MyReviews></MyReviews>
+            <MyBlogs></MyBlogs>
           </PrivateRoute>
         ),
       },
       {
-        path: "/updateReview/:id",
+        path: "/updateBlog/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/review/${params.id}`),
         element: (
           <PrivateRoute>
-            <UpdateReview></UpdateReview>
+            <UpdateBlog></UpdateBlog>
           </PrivateRoute>
         ),
       },
