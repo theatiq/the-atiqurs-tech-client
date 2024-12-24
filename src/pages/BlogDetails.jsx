@@ -28,41 +28,6 @@ const BlogDetails = () => {
   const currentUserName = user.displayName;
   const currentPhoto = user.photoURL;
 
-  // const watchList = {
-  //   _id,
-  //   title,
-  //   image,
-  //   category,
-  //   shortDescription,
-  //   longDescription,
-  //   postedDate,
-  //   postedBy,
-  //   postedByPhoto,
-  //   currentUserName,
-  //   currenEmail,
-  // };
-
-  // const handleAddWatchList = () => {
-  //   fetch("http://localhost:5000/watchList", {
-  //     method: "POST",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(watchList),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.insertedId) {
-  //         Swal.fire({
-  //           title: "Success!",
-  //           text: "Successfully added to Watch List",
-  //           icon: "success",
-  //           confirmButtonText: "Ok",
-  //         });
-  //       }
-  //     });
-  // };
-
   const handleComment = (e) => {
     e.preventDefault();
     const comment = e.target.comment.value;

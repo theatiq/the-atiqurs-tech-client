@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Blog = ({ reviews }) => {
+  const { user } = useContext(AuthContext);
   const {
     _id,
     title,
@@ -16,17 +18,18 @@ const Blog = ({ reviews }) => {
   } = reviews;
 
   const wishList = {
-    _id,
+    blogId: reviews?._id,
     title,
     image,
     category,
     shortDescription,
     longDescription,
     postedDate,
-    email,
+    email: user.email,
+    timestamp: new Date(),
   };
 
-  const handleAddWatchList = () => {
+  const handleAddWishList = () => {
     fetch("http://localhost:5000/wishList", {
       method: "POST",
       headers: {
@@ -79,7 +82,7 @@ const Blog = ({ reviews }) => {
       <NavLink to={`/blogs/${_id}`} className="btn mb-5 mx-5">
         Explore Details
       </NavLink>
-      <button onClick={handleAddWatchList} className="btn">
+      <button onClick={handleAddWishList} className="btn">
         Add to Wishlist
       </button>
     </div>

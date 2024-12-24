@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const allReviews = useLoaderData();
+  const allBlogs = useLoaderData();
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -53,9 +53,9 @@ const Home = () => {
         Recent Blog Posts
       </h1>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5 p-5">
-        {allReviews.map((review) => (
-          <div key={review._id} className="">
-            <Blog reviews={review} />
+        {allBlogs.map((blog) => (
+          <div key={blog._id} className="">
+            <Blog reviews={blog} />
           </div>
         ))}
       </div>

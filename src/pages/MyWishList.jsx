@@ -14,7 +14,7 @@ const MyWishList = () => {
       .then((data) => setMyWishList(data));
   }, [email]);
 
-  const handleDeleteWatchList = (_id) => {
+  const handleDeleteWishList = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "This action cannot be undone!",
@@ -33,7 +33,7 @@ const MyWishList = () => {
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "The item has been removed.", "success");
               const remainingWatchList = myWishList.filter(
-                (watch) => watch._id !== _id
+                (wish) => wish._id !== _id
               );
               setMyWishList(remainingWatchList);
             }
@@ -84,7 +84,7 @@ const MyWishList = () => {
                 </td>
                 <td className="p-3 border border-gray-300">
                   <button
-                    onClick={() => handleDeleteWatchList(wish._id)}
+                    onClick={() => handleDeleteWishList(wish._id)}
                     className="btn btn-sm bg-red-500 text-white hover:bg-red-600 flex items-center px-2 py-1 rounded"
                     title="Delete from Watch List"
                   >
