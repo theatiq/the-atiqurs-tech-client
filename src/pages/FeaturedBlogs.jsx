@@ -1,8 +1,72 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { NavLink, useLoaderData } from "react-router-dom";
+import {
+  useReactTable,
+  getCoreRowModel,
+  getSortedRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 
 const FeaturedBlogs = () => {
   const allBlogs = useLoaderData();
+
+  // Define Table Columns
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "index",
+        header: "#",
+        cell: (info) => info.row.index + 1, // Index column
+      },
+      {
+        accessorKey: "image",
+        header: "Thumbnail",
+        cell: (info) => (
+          <img
+            src={info.getValue()}
+            alt="Thumbnail"
+            className="w-10 h-10 rounded-full mx-auto"
+          />
+        ),
+      },
+      {
+        accessorKey: "title",
+        header: "Title",
+      },
+      {
+        accessorKey: "longDescription",
+        header: "Description",
+        cell: (info) => (
+          <div className="truncate" title={info.getValue()}>
+            {info.getValue()}
+          </div>
+        ),
+      },
+      {
+        accessorKey: "postedDate",
+        header: "Posted On",
+      },
+      {
+        accessorKey: "category",
+        header: "Category",
+      },
+    ],
+    []
+  );
+
+  // Table Instance
+  const [sorting, setSorting] = React.useState([]);
+  const table = useReactTable({
+    data: allBlogs,
+    columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  });
+
   return (
     <div className="p-5">
       <h2 className="text-3xl font-bold text-center mb-5">
@@ -10,56 +74,37 @@ const FeaturedBlogs = () => {
       </h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
-          {/* Table Head */}
           <thead className="bg-gray-200">
-            <tr>
-              <th className="p-3 border border-gray-300">#</th>
-              <th className="p-3 border border-gray-300">Thumbnail</th>
-              <th className="p-3 border border-gray-300">Title</th>
-              <th className="p-3 border border-gray-300">Description</th>
-              <th className="p-3 border border-gray-300">Posted On</th>
-              <th className="p-3 border border-gray-300">Category</th>
-              <th className="p-3 border border-gray-300">Actions</th>
-            </tr>
-          </thead>
-
-          {/* Table Body */}
-          <tbody>
-            {allBlogs.map((blog, index) => (
-              <tr key={blog._id} className="text-center hover:bg-gray-100">
-                <td className="p-3 border border-gray-300">{index + 1}</td>
-                <td className="p-3 border border-gray-300">
-                  <img
-                    src={blog.image}
-                    alt={blog.title}
-                    className="w-10 h-10 rounded-full mx-auto"
-                  />
-                </td>
-                <td className="p-3 border border-gray-300">{blog.title}</td>
-                <td className="p-3 border border-gray-300">
-                  {blog.longDescription}
-                </td>
-                <td className="p-3 border border-gray-300">
-                  {blog.postedDate}
-                </td>
-                <td className="p-3 border border-gray-300">{blog.category}</td>
-                <td className="p-3 border border-gray-300 flex justify-center space-x-2">
-                  <NavLink to={`/updateBlog/${blog._id}`}>
-                    <button
-                      className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 flex items-center px-2 py-1 rounded"
-                      title="Update Review"
-                    >
-                      {/* <MdOutlineSecurityUpdateGood size={18} /> */}
-                    </button>
-                  </NavLink>
-                  <button
-                    onClick={() => handleDeleteBlog(blog._id)}
-                    className="btn btn-sm bg-red-500 text-white hover:bg-red-600 flex items-center px-2 py-1 rounded"
-                    title="Delete Review"
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th
+                    key={header.id}
+                    onClick={header.column.getToggleSortingHandler()}
+                    className="p-3 border border-gray-300 text-left cursor-pointer"
                   >
-                    {/* <MdDelete size={18} /> */}
-                  </button>
-                </td>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                    {header.column.getIsSorted()
+                      ? header.column.getIsSorted() === "asc"
+                        ? " 🔼"
+                        : " 🔽"
+                      : null}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id} className="hover:bg-gray-100">
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id} className="p-3 border">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
