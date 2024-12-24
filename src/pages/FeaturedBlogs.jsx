@@ -16,8 +16,8 @@ const FeaturedBlogs = () => {
               <th className="p-3 border border-gray-300">#</th>
               <th className="p-3 border border-gray-300">Thumbnail</th>
               <th className="p-3 border border-gray-300">Title</th>
-              <th className="p-3 border border-gray-300">Rating</th>
-              <th className="p-3 border border-gray-300">Year</th>
+              <th className="p-3 border border-gray-300">Description</th>
+              <th className="p-3 border border-gray-300">Posted On</th>
               <th className="p-3 border border-gray-300">Category</th>
               <th className="p-3 border border-gray-300">Actions</th>
             </tr>
@@ -36,9 +36,13 @@ const FeaturedBlogs = () => {
                   />
                 </td>
                 <td className="p-3 border border-gray-300">{blog.title}</td>
-                <td className="p-3 border border-gray-300">{blog.rating}</td>
-                <td className="p-3 border border-gray-300">{blog.year}</td>
-                <td className="p-3 border border-gray-300">{blog.genres}</td>
+                <td className="p-3 border border-gray-300">
+                  {blog.longDescription}
+                </td>
+                <td className="p-3 border border-gray-300">
+                  {blog.postedDate}
+                </td>
+                <td className="p-3 border border-gray-300">{blog.category}</td>
                 <td className="p-3 border border-gray-300 flex justify-center space-x-2">
                   <NavLink to={`/updateBlog/${blog._id}`}>
                     <button
