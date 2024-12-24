@@ -32,10 +32,10 @@ const MyWishList = () => {
           .then((data) => {
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "The item has been removed.", "success");
-              const remainingWatchList = myWishList.filter(
+              const remainingWishList = myWishList.filter(
                 (wish) => wish._id !== _id
               );
-              setMyWishList(remainingWatchList);
+              setMyWishList(remainingWishList);
             }
           });
       }
