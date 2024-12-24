@@ -43,7 +43,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/myReviews"} className="hover:text-teal-400">
+            <NavLink to={"/featuredBlogs"} className="hover:text-teal-400">
               Featured Blogs
             </NavLink>
           </li>

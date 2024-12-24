@@ -1,52 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
-import Swal from "sweetalert2";
-import { AuthContext } from "../providers/AuthProvider";
-import { NavLink } from "react-router-dom";
-import { MdDelete, MdOutlineSecurityUpdateGood } from "react-icons/md";
+import React from "react";
+import { NavLink, useLoaderData } from "react-router-dom";
 
-const MyBlogs = () => {
-  const { user } = useContext(AuthContext);
-  const [myBlogs, setMyBlogs] = useState([]);
-  const email = user.email;
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/myReviews?email=${email}`)
-      .then((res) => res.json())
-      .then((data) => setMyBlogs(data));
-  }, [email]);
-
-  const handleDeleteBlog = (_id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/blog/${_id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Your blog has been deleted.", "success");
-              const remainingBlogs = myBlogs.filter(
-                (review) => review._id !== _id
-              );
-              setMyBlogs(remainingBlogs);
-            }
-          });
-      }
-    });
-  };
-
+const FeaturedBlogs = () => {
+  const allBlogs = useLoaderData();
   return (
     <div className="p-5">
       <h2 className="text-3xl font-bold text-center mb-5">
-        My Blogs ({myBlogs.length})
+        Featured Blogs ({allBlogs.length})
       </h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
@@ -65,7 +25,7 @@ const MyBlogs = () => {
 
           {/* Table Body */}
           <tbody>
-            {myBlogs.map((blog, index) => (
+            {allBlogs.map((blog, index) => (
               <tr key={blog._id} className="text-center hover:bg-gray-100">
                 <td className="p-3 border border-gray-300">{index + 1}</td>
                 <td className="p-3 border border-gray-300">
@@ -85,7 +45,7 @@ const MyBlogs = () => {
                       className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 flex items-center px-2 py-1 rounded"
                       title="Update Review"
                     >
-                      <MdOutlineSecurityUpdateGood size={18} />
+                      {/* <MdOutlineSecurityUpdateGood size={18} /> */}
                     </button>
                   </NavLink>
                   <button
@@ -93,7 +53,7 @@ const MyBlogs = () => {
                     className="btn btn-sm bg-red-500 text-white hover:bg-red-600 flex items-center px-2 py-1 rounded"
                     title="Delete Review"
                   >
-                    <MdDelete size={18} />
+                    {/* <MdDelete size={18} /> */}
                   </button>
                 </td>
               </tr>
@@ -105,4 +65,4 @@ const MyBlogs = () => {
   );
 };
 
-export default MyBlogs;
+export default FeaturedBlogs;

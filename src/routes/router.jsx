@@ -21,6 +21,7 @@ import BlogDetails from "../pages/BlogDetails";
 import MyBlogs from "../pages/MyBlogs";
 import UpdateBlog from "../pages/UpdateBlog";
 import MyWishList from "../pages/MyWishList";
+import FeaturedBlogs from "../pages/FeaturedBlogs";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
       {
         path: "/allBlogs",
         element: <AllBlogs></AllBlogs>,
+        loader: () => fetch("http://localhost:5000/blogs"),
+      },
+      {
+        path: "/featuredBlogs",
+        element: <FeaturedBlogs></FeaturedBlogs>,
         loader: () => fetch("http://localhost:5000/blogs"),
       },
 
