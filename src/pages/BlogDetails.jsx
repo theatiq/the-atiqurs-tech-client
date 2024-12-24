@@ -24,7 +24,7 @@ const BlogDetails = () => {
     postedBy,
     postedByPhoto,
   } = blogs;
-  const currenEmail = user.email;
+  const currentEmail = user.email;
   const currentUserName = user.displayName;
   const currentPhoto = user.photoURL;
 
@@ -63,6 +63,39 @@ const BlogDetails = () => {
   //     });
   // };
 
+  const handleComment = (e) => {
+    e.preventDefault();
+    const comment = e.target.comment.value;
+    console.log(comment);
+
+    const commentData = {
+      blogId: blogs?._id,
+      comment,
+      currentUserName,
+      currentPhoto,
+      currentEmail,
+      timestamp: new Date(),
+    };
+    fetch("http://localhost:5000/comment", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(commentData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Thanks for your valuable comment",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          e.target.reset();
+        }
+      });
+  };
   if (!blogs) return <Loading></Loading>;
 
   return (
@@ -97,26 +130,34 @@ const BlogDetails = () => {
               <button className="btn">Post a Comment</button>
             </div>
             <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
-              <form className="card-body">
+              <form onSubmit={handleComment} className="card-body">
                 <div className="flex flex-col lg:flex-row gap-5">
                   <div className="form-control flex-1">
                     <label className="label">
                       <span className="label-text">Long Description</span>
                     </label>
-                    <textarea
-                      name="longDescription"
-                      placeholder="Enter your long description here..."
-                      className="textarea textarea-bordered h-40"
-                      required
-                    ></textarea>
+                    {currentEmail !== email ? (
+                      <textarea
+                        name="comment"
+                        placeholder="Enter your long description here..."
+                        className="textarea textarea-bordered h-40"
+                        required
+                      ></textarea>
+                    ) : (
+                      <p className="text-red-500">
+                        You can't comment on your own post
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div>
                   <h1>Commented by</h1>
                   <p className="text-gray-600">
-                    Posted Name: {currentUserName}
+                    Commentator Name: {currentUserName}
                   </p>
-                  <p className="text-gray-600">Posted Email: {currenEmail}</p>
+                  <p className="text-gray-600">
+                    Commentator Email: {currentEmail}
+                  </p>
                   <img
                     className="w-10 rounded-full"
                     src={currentPhoto}
