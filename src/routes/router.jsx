@@ -35,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addBlog",
-        element: <AddBlog></AddBlog>,
+        element: (
+          <PrivateRoute>
+            <AddBlog></AddBlog>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/allBlogs",
@@ -50,11 +54,7 @@ const router = createBrowserRouter([
 
       {
         path: "/myBlogs",
-        element: (
-          <PrivateRoute>
-            <MyBlogs></MyBlogs>
-          </PrivateRoute>
-        ),
+        element: <MyBlogs></MyBlogs>,
       },
       {
         path: "/updateBlog/:id",
@@ -113,11 +113,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/blogs/:id",
-    element: (
-      <PrivateRoute>
-        <BlogDetails></BlogDetails>
-      </PrivateRoute>
-    ),
+    element: <BlogDetails></BlogDetails>,
     loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`),
   },
 

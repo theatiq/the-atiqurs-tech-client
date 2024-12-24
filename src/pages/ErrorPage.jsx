@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import errorPage from "../../src/assets/404.gif"; // Ensure the path is correct
+// import errorPage from "../../src/assets/404.gif"; // Ensure the path is correct
 
 const ErrorPage = () => {
   const navigate = useNavigate();

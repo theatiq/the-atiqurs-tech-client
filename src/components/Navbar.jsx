@@ -30,6 +30,16 @@ const Navbar = () => {
           All Blogs
         </NavLink>
       </li>
+      <li>
+        <NavLink to={"/myBlogs"} className="hover:text-teal-400">
+          My Blogs
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={"/featuredBlogs"} className="hover:text-teal-400">
+          Featured Blogs
+        </NavLink>
+      </li>
       {user && (
         <>
           <li>
@@ -37,16 +47,7 @@ const Navbar = () => {
               Add Blog
             </NavLink>
           </li>
-          <li>
-            <NavLink to={"/myBlogs"} className="hover:text-teal-400">
-              My Blogs
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/featuredBlogs"} className="hover:text-teal-400">
-              Featured Blogs
-            </NavLink>
-          </li>
+
           <li>
             <NavLink to={"/myWishList"} className="hover:text-teal-400">
               Wishlist

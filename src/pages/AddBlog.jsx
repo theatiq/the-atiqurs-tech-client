@@ -37,6 +37,8 @@ const AddBlog = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify(newPost),
+      withCredentials: true,
+      credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => {

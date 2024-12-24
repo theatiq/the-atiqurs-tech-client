@@ -7,7 +7,7 @@ import { MdDelete, MdOutlineSecurityUpdateGood } from "react-icons/md";
 const MyBlogs = () => {
   const { user } = useContext(AuthContext);
   const [myBlogs, setMyBlogs] = useState([]);
-  const email = user.email;
+  const email = user?.email;
 
   useEffect(() => {
     fetch(`http://localhost:5000/myReviews?email=${email}`)
