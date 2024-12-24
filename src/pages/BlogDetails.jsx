@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { NavLink, useLoaderData, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Loading from "./Loading";
@@ -92,7 +92,6 @@ const BlogDetails = () => {
               <p className="text-gray-600">Posted Name: {postedBy}</p>
               <p className="text-gray-600">Posted Email: {email}</p>
               <img className="w-10 rounded-full" src={postedByPhoto} alt="" />
-              <button className="btn">Post a Comment</button>
             </div>
             <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
               <form onSubmit={handleComment} className="card-body">
@@ -114,6 +113,9 @@ const BlogDetails = () => {
                       </p>
                     )}
                   </div>
+                  <button>Update Blog</button>
+
+               
                 </div>
                 <div>
                   <h1>Commented by</h1>
@@ -131,7 +133,18 @@ const BlogDetails = () => {
                 </div>
 
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Post a Comment</button>
+                  {currentEmail !== email ? (
+                    <button className="btn btn-primary">Post a Comment</button>
+                  ) : (
+                    <NavLink to={`/updateBlog/${_id}`}>
+                      <button
+                        className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 flex items-center px-2 py-1 rounded"
+                        title="Update Review"
+                      >
+                        Update Blog
+                      </button>
+                    </NavLink>
+                  )}
                 </div>
               </form>
             </div>

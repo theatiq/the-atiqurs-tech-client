@@ -25,8 +25,8 @@ const Blog = ({ reviews }) => {
     shortDescription,
     longDescription,
     postedDate,
-    email: user.email,
-    timestamp: new Date(),
+    email: user?.email,
+    timestamp: new Date().toLocaleString,
   };
 
   const handleAddWishList = () => {

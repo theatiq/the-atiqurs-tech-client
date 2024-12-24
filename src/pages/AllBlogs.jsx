@@ -1,25 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Blog from "./Blog";
+import { FcSearch } from "react-icons/fc";
 
 const AllBlogs = () => {
   const allBlogs = useLoaderData();
   const [filteredBlogs, setFilteredBlogs] = useState(allBlogs);
-  const [sortOption, setSortOption] = useState("");
+  // const [sortOption, setSortOption] = useState("");
   const [genreFilter, setGenreFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Sort Functionality
-  const handleSort = (option) => {
-    setSortOption(option);
-    const sortedBlogs = [...filteredBlogs].sort((a, b) => {
-      if (option === "rating-asc") return a.rating - b.rating;
-      if (option === "rating-desc") return b.rating - a.rating;
-      if (option === "year-asc") return a.year - b.year;
-      if (option === "year-desc") return b.year - a.year;
-      return 0;
-    });
-    setFilteredBlogs(sortedBlogs);
-  };
+  useEffect(() => {
+    const filterBlogs = allBlogs.filter((blog) =>
+      blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredBlogs(filterBlogs);
+  }, [searchQuery, allBlogs]);
 
   // Filter Functionality
   const handleFilter = (genre) => {
@@ -27,8 +23,8 @@ const AllBlogs = () => {
     if (genre === "all") {
       setFilteredBlogs(allBlogs); // Reset to all reviews
     } else {
-      const filtered = allBlogs.filter((review) =>
-        review.genres.toLowerCase().includes(genre.toLowerCase())
+      const filtered = allBlogs.filter((blog) =>
+        blog.category.toLowerCase().includes(genre.toLowerCase())
       );
       return setFilteredBlogs(filtered);
     }
@@ -43,22 +39,15 @@ const AllBlogs = () => {
       {/* Dropdown Menus */}
       <div className="lg:flex justify-between items-center mb-5 space-y-5">
         {/* Sorting Dropdown */}
-        <div className="">
-          <label htmlFor="sort" className="font-semibold mr-2">
-            Sort by:
-          </label>
-          <select
-            id="sort"
-            value={sortOption}
-            onChange={(e) => handleSort(e.target.value)}
-            className="border p-2 rounded"
-          >
-            <option value="">Select</option>
-            <option value="rating-asc">Rating (Low to High)</option>
-            <option value="rating-desc">Rating (High to Low)</option>
-            <option value="year-asc">Year (Oldest to Newest)</option>
-            <option value="year-desc">Year (Newest to Oldest)</option>
-          </select>
+        <div className="flex justify-center my-5">
+          <input
+            type="text"
+            placeholder="Search by title..."
+            className="p-2 border rounded-lg w-1/2"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <FcSearch className="-translate-x-10 translate-y-2 text-2xl"/>
         </div>
 
         {/* Filter Dropdown */}
@@ -73,10 +62,16 @@ const AllBlogs = () => {
             className="border p-2 rounded w-[170px]"
           >
             <option value="all">All</option>
-            <option value="Action">Action</option>
-            <option value="Adventure">Adventure</option>
-            <option value="Strategy">Strategy</option>
-            <option value="Sports">Sports</option>
+            <option value="Tech News & Trends">Tech News & Trends</option>
+            <option value="Programming & Development">
+              Programming & Development
+            </option>
+            <option value="Gadgets & Reviews">Gadgets & Reviews</option>
+            <option value="How-To Guides & Tutorials">
+              {" "}
+              How-To Guides & Tutorials
+            </option>
+            <option value="Future of Tech">Future of Tech</option>
           </select>
         </div>
       </div>
