@@ -42,20 +42,50 @@ const UpdateBlog = () => {
       method: "PUT",
       headers: {
         "content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
       },
       body: JSON.stringify(updatedBlog),
+      withCredentials: true,
+      credentials: "include",
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          if (res.status === 401) {
+            // Invalid token
+            Swal.fire({
+              title: "Unauthorized!",
+              text: "Your session has expired or the token is invalid. Please log in again.",
+              icon: "error",
+              confirmButtonText: "Ok",
+            }).then(() => {
+              logOut(); // Log out the user if applicable
+            });
+          } else {
+            // Other errors
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong while updating the blog.",
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+          }
+          throw new Error("Failed to fetch");
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.modifiedCount) {
           Swal.fire({
             title: "Success!",
-            text: "Review updated successfully",
+            text: "Blog added successfully.",
             icon: "success",
             confirmButtonText: "Ok",
           });
           e.target.reset();
         }
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
       });
   };
 

@@ -35,25 +35,52 @@ const AddBlog = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
       },
       body: JSON.stringify(newPost),
       withCredentials: true,
       credentials: "include",
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          if (res.status === 401) {
+            // Invalid token
+            Swal.fire({
+              title: "Unauthorized!",
+              text: "Your session has expired or the token is invalid. Please log in again.",
+              icon: "error",
+              confirmButtonText: "Ok",
+            }).then(() => {
+              logOut(); // Log out the user if applicable
+            });
+          } else {
+            // Other errors
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong while adding the blog.",
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+          }
+          throw new Error("Failed to fetch");
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",
-            text: "Review added successfully",
+            text: "Blog added successfully.",
             icon: "success",
             confirmButtonText: "Ok",
           });
           e.target.reset();
         }
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
       });
   };
-
   return (
     <div className="lg:w-3/4 mx-auto">
       <div className="text-center p-10">
