@@ -86,12 +86,24 @@ const Blog = ({ reviews }) => {
         >
           Explore Details
         </NavLink>
-        <button
+        {user?.email ? (
+          <button
+            onClick={handleAddWishList}
+            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+          >
+            Add to Wishlist
+          </button>
+        ) : (
+          <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+            Add to Wishlist
+          </button>
+        )}
+        {/* <button
           onClick={handleAddWishList}
           className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200"
         >
           Add to Wishlist
-        </button>
+        </button> */}
       </div>
     </div>
   );

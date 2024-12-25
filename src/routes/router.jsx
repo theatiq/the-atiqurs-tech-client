@@ -119,7 +119,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/blogs/:id",
-    element: <BlogDetails></BlogDetails>,
+    element: (
+      <PrivateRoute>
+        <BlogDetails></BlogDetails>
+      </PrivateRoute>
+    ),
     loader: ({ params }) =>
       fetch(
         `https://assignment-11-atiqur-server.vercel.app/blogs/${params.id}`
