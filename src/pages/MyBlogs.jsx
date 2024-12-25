@@ -10,7 +10,9 @@ const MyBlogs = () => {
   const email = user?.email;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myReviews?email=${email}`)
+    fetch(
+      `https://assignment-11-atiqur-server.vercel.app/myReviews?email=${email}`
+    )
       .then((res) => res.json())
       .then((data) => setMyBlogs(data));
   }, [email]);
@@ -26,7 +28,7 @@ const MyBlogs = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/blog/${_id}`, {
+        fetch(`https://assignment-11-atiqur-server.vercel.app/blog/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

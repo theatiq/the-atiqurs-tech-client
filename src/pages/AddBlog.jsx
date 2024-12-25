@@ -31,7 +31,7 @@ const AddBlog = () => {
     };
 
     // send data to the server and database
-    fetch("http://localhost:5000/addPost", {
+    fetch("https://assignment-11-atiqur-server.vercel.app/addPost", {
       method: "POST",
       headers: {
         "content-type": "application/json",

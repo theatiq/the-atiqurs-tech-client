@@ -38,7 +38,7 @@ const UpdateBlog = () => {
     };
 
     // send data to the server and database
-    fetch(`http://localhost:5000/update/${_id}`, {
+    fetch(`https://assignment-11-atiqur-server.vercel.app/update/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

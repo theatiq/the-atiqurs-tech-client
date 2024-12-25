@@ -64,23 +64,27 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("State Captured", currentUser?.email);
+      
 
       if (currentUser?.email) {
         const user = { email: currentUser.email };
         axios
-          .post("http://localhost:5000/jwt", user, {
+          .post("https://assignment-11-atiqur-server.vercel.app/jwt", user, {
             withCredentials: true,
           })
           .then((res) => {
-            console.log("Login properly", res.data);
+            
             setLoading(false);
           });
       } else {
         axios
-          .post("http://localhost:5000/logout", {}, { withCredentials: true })
+          .post(
+            "https://assignment-11-atiqur-server.vercel.app/logout",
+            {},
+            { withCredentials: true }
+          )
           .then((res) => {
-            console.log("Logout", res.data);
+            
             setLoading(false);
           });
       }

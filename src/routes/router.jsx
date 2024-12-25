@@ -22,6 +22,7 @@ import MyBlogs from "../pages/MyBlogs";
 import UpdateBlog from "../pages/UpdateBlog";
 import MyWishList from "../pages/MyWishList";
 import FeaturedBlogs from "../pages/FeaturedBlogs";
+import WishlistDetails from "../pages/wishlistDetails";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,8 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:5000/blogsHome"),
+        loader: () =>
+          fetch("https://assignment-11-atiqur-server.vercel.app/blogsHome"),
       },
       {
         path: "/addBlog",
@@ -44,12 +46,14 @@ const router = createBrowserRouter([
       {
         path: "/allBlogs",
         element: <AllBlogs></AllBlogs>,
-        loader: () => fetch("http://localhost:5000/blogs"),
+        loader: () =>
+          fetch("https://assignment-11-atiqur-server.vercel.app/blogs"),
       },
       {
         path: "/featuredBlogs",
         element: <FeaturedBlogs></FeaturedBlogs>,
-        loader: () => fetch("http://localhost:5000/blogsFeatured"),
+        loader: () =>
+          fetch("https://assignment-11-atiqur-server.vercel.app/blogsFeatured"),
       },
 
       {
@@ -59,7 +63,9 @@ const router = createBrowserRouter([
       {
         path: "/updateBlog/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/blogs/${params.id}`),
+          fetch(
+            `https://assignment-11-atiqur-server.vercel.app/blogs/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             <UpdateBlog></UpdateBlog>
@@ -114,7 +120,18 @@ const router = createBrowserRouter([
   {
     path: "/blogs/:id",
     element: <BlogDetails></BlogDetails>,
-    loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`),
+    loader: ({ params }) =>
+      fetch(
+        `https://assignment-11-atiqur-server.vercel.app/blogs/${params.id}`
+      ),
+  },
+  {
+    path: "/wishlistDetails/:id",
+    element: <WishlistDetails></WishlistDetails>,
+    loader: ({ params }) =>
+      fetch(
+        `http://localhost:5000/wishList/${params.id}`
+      ),
   },
 
   {

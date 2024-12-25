@@ -6,7 +6,7 @@ import Loading from "./Loading";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
 
-const BlogDetails = () => {
+const WishlistDetails = () => {
   const { user } = useContext(AuthContext);
   const blogs = useLoaderData();
   const { id } = useParams();
@@ -89,6 +89,7 @@ const BlogDetails = () => {
                   src={postedByPhoto}
                   alt={postedBy}
                   className="w-12 h-12 rounded-full mr-4"
+                  referrerPolicy="no-referrer"
                 />
                 <div>
                   <p className="text-gray-600 font-semibold">{postedBy}</p>
@@ -118,6 +119,7 @@ const BlogDetails = () => {
                       src={currentPhoto}
                       alt={currentUserName}
                       className="w-10 h-10 rounded-full"
+                      referrerPolicy="no-referrer"
                     />
                     <p className="text-gray-600">{currentUserName}</p>
                   </div>
@@ -151,4 +153,4 @@ const BlogDetails = () => {
   );
 };
 
-export default BlogDetails;
+export default WishlistDetails;

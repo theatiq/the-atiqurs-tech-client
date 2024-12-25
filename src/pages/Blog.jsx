@@ -29,7 +29,7 @@ const Blog = ({ reviews }) => {
   };
 
   const handleAddWishList = () => {
-    fetch("http://localhost:5000/wishList", {
+    fetch("https://assignment-11-atiqur-server.vercel.app/wishList", {
       method: "POST",
       headers: {
         "content-type": "application/json",
