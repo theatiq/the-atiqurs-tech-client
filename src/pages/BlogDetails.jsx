@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useLoaderData, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -8,6 +8,9 @@ import Swal from "sweetalert2";
 
 const BlogDetails = () => {
   const { user } = useContext(AuthContext);
+  // const { commentsData, setCommentsData } = useState([]);
+  const [commentsData, setCommentsData] = useState([]);
+
   const blogs = useLoaderData();
   const { id } = useParams();
   const {
@@ -59,6 +62,26 @@ const BlogDetails = () => {
         }
       });
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/comments?blogId=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCommentsData(data);
+      });
+  }, [id]);
+  console.log(commentsData);
+
+  // const fetchComments = async (blogId) => {
+  //   try {
+  //     const response = await fetch(`/comments?blogId=${blogId}`);
+  //     const comments = await response.json();
+  //     console.log(comments); // Display the filtered comments
+  //   } catch (error) {
+  //     console.error("Error fetching comments:", error);
+  //   }
+  // };
 
   if (!blogs) return <Loading />;
 
@@ -141,6 +164,15 @@ const BlogDetails = () => {
                 </button>
               </NavLink>
             )}
+          </div>
+          <div>
+            {commentsData.map((comment) => (
+              <div>
+                <p>{comment.comment}</p>
+                <p>{comment.currentUserName}</p>
+                <img src={comment.currentPhoto} alt="" />
+              </div>
+            ))}
           </div>
         </div>
       </main>
