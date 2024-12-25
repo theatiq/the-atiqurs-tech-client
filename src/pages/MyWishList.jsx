@@ -21,7 +21,7 @@ const MyWishList = () => {
     const fetchWishList = async () => {
       try {
         const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token
-        const res = await fetch(`http://localhost:5000/myWishList?email=${email}`, {
+        const res = await fetch("http://localhost:5000/myWishList", {
           headers: {
             Authorization: `Bearer ${token}`, // Include the token in the Authorization header
           },
@@ -50,9 +50,7 @@ const MyWishList = () => {
     };
 
     fetchWishList();
-  }, [email, logOut]);
-
-
+  }, [logOut]);
 
   const handleDeleteWishList = (_id) => {
     Swal.fire({

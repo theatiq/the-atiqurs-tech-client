@@ -222,3 +222,73 @@ const Slider = () => {
 
 // export default Slider;
 
+useEffect(() => {
+    const fetchWishList = async () => {
+      try {
+        const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token
+        const res = await fetch(`http://localhost:5000/myWishList?email=${email}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
+          withCredentials: true,
+          credentials: "include",
+        });
+
+        if (res.status === 401) {
+          // Handle unauthorized (invalid or expired token)
+          Swal.fire({
+            title: "Session Expired",
+            text: "Please log in again to access your wishlist.",
+            icon: "warning",
+            confirmButtonText: "Log In",
+          }).then(() => {
+            logOut(); // Log out the user if applicable
+          });
+          return;
+        }
+
+        const data = await res.json();
+        setMyWishList(data);
+      } catch (error) {
+        console.error("Error fetching wishlist:", error);
+      }
+    };
+
+    fetchWishList();
+  }, [email, logOut]);
+
+useEffect(() => {
+    const fetchWishList = async () => {
+      try {
+        const token = localStorage.getItem("jwtToken"); // Retrieve the JWT token
+        const res = await fetch(`http://localhost:5000/myWishList?email=${email}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          },
+          withCredentials: true,
+          credentials: "include",
+        });
+
+        if (res.status === 401) {
+          // Handle unauthorized (invalid or expired token)
+          Swal.fire({
+            title: "Session Expired",
+            text: "Please log in again to access your wishlist.",
+            icon: "warning",
+            confirmButtonText: "Log In",
+          }).then(() => {
+            logOut(); // Log out the user if applicable
+          });
+          return;
+        }
+
+        const data = await res.json();
+        setMyWishList(data);
+      } catch (error) {
+        console.error("Error fetching wishlist:", error);
+      }
+    };
+
+    fetchWishList();
+  }, [email, logOut]);
+
