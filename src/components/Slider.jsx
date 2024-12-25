@@ -21,7 +21,7 @@ const Slider = () => {
     <div className="relative w-full h-[400px] overflow-hidden">
       {/* Background Image */}
       <img src={img2} className="w-full h-full object-cover" alt="Slide" />
-      
+
       {/* Overlay and Animated Text */}
       <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center text-white p-5">
         <motion.h2
@@ -30,7 +30,7 @@ const Slider = () => {
           initial="initial"
           animate="animate"
         >
-          Gaming Contest Announcement
+          Welcome to latest Tech Blog
         </motion.h2>
         <motion.p
           className="text-lg"
@@ -38,8 +38,8 @@ const Slider = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5 }}
         >
-          Join our upcoming Global Gaming Contest 2024 on March 15th! Register
-          now and win exciting prizes.
+          Stay ahead with the latest in tech trends! Explore insights, tips, and
+          innovations shaping the future of technology.
         </motion.p>
       </div>
     </div>

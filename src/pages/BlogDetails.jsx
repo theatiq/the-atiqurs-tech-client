@@ -65,7 +65,9 @@ const BlogDetails = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/comments?blogId=${id}`)
+    fetch(
+      `https://assignment-11-atiqur-server.vercel.app/comments?blogId=${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

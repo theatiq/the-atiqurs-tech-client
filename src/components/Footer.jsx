@@ -82,7 +82,7 @@ const Footer = () => {
         </div>
         {/* Logo and Description */}
         <div className="flex flex-col items-start">
-          <img className="w-16 mb-4" src={imgIcon} alt="Logo" />
+          <img className="w-16 mb-4 rounded-full" src={imgIcon} alt="Logo" />
           <p className="text-gray-400">
             <span className="font-bold text-white">Atiqur's Tech</span>
             <br />

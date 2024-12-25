@@ -130,7 +130,7 @@ const router = createBrowserRouter([
     element: <WishlistDetails></WishlistDetails>,
     loader: ({ params }) =>
       fetch(
-        `http://localhost:5000/wishList/${params.id}`
+        `https://assignment-11-atiqur-server.vercel.app/wishList/${params.id}`
       ),
   },
 
