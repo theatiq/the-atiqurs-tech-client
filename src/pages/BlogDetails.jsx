@@ -5,11 +5,9 @@ import Footer from "../components/Footer";
 import Loading from "./Loading";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
-// import { CopyToClipboard } from "react-copy-to-clipboard";
-// import toast from "react-hot-toast";
 
 const BlogDetails = () => {
-  const { user, setUser, logOut, createUserGoogle } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const blogs = useLoaderData();
   const { id } = useParams();
   const {
@@ -24,15 +22,14 @@ const BlogDetails = () => {
     postedBy,
     postedByPhoto,
   } = blogs;
-  const currentEmail = user.email;
-  const currentUserName = user.displayName;
-  const currentPhoto = user.photoURL;
+
+  const currentEmail = user?.email;
+  const currentUserName = user?.displayName;
+  const currentPhoto = user?.photoURL;
 
   const handleComment = (e) => {
     e.preventDefault();
     const comment = e.target.comment.value;
-    console.log(comment);
-
     const commentData = {
       blogId: blogs?._id,
       comment,
@@ -41,6 +38,7 @@ const BlogDetails = () => {
       currentEmail,
       timestamp: new Date(),
     };
+
     fetch("http://localhost:5000/comment", {
       method: "POST",
       headers: {
@@ -61,7 +59,8 @@ const BlogDetails = () => {
         }
       });
   };
-  if (!blogs) return <Loading></Loading>;
+
+  if (!blogs) return <Loading />;
 
   return (
     <div>
@@ -69,85 +68,79 @@ const BlogDetails = () => {
         <Navbar />
       </header>
       <main className="w-11/12 mx-auto mt-10 my-10">
-        <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
-          <div className="lg:flex items-center mb-5">
+        <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-8">
+          <div className="lg:flex items-center mb-6">
             <img
               src={image}
-              alt={image}
-              className="w-64 h-64 mr-6 rounded-lg"
+              alt={title}
+              className="w-64 h-64 mr-6 rounded-lg shadow-lg object-cover"
             />
-            <div>
-              <h1 className="text-3xl font-bold text-blue-950">{title}</h1>
-              <p className="text-gray-600">{title}</p>
-              <p className="mt-2 text-lg font-medium">
-                Category: <span className="text-blue-600">{category}</span>
+            <div className="flex-1">
+              <h1 className="text-4xl font-bold text-blue-900 mb-2">{title}</h1>
+              <p className="text-gray-600 mb-4">{shortDescription}</p>
+              <p className="text-lg font-medium text-blue-600 mb-2">
+                Category: {category}
               </p>
-              <p className="mt-2 text-lg font-medium">
-                Details:{" "}
-                <span className="text-blue-600">{longDescription}</span>
+              <p className="text-lg font-medium text-blue-600 mb-4">
+                Posted On: {postedDate}
               </p>
-              <p className="mt-2 text-lg font-medium">
-                Posted On: <span className="text-blue-600">{postedDate}</span>
-              </p>
-              <p className="text-gray-600">Posted Name: {postedBy}</p>
-              <p className="text-gray-600">Posted Email: {email}</p>
-              <img className="w-10 rounded-full" src={postedByPhoto} alt="" />
-            </div>
-            <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
-              <form onSubmit={handleComment} className="card-body">
-                <div className="flex flex-col lg:flex-row gap-5">
-                  <div className="form-control flex-1">
-                    <label className="label">
-                      <span className="label-text">Long Description</span>
-                    </label>
-                    {currentEmail !== email ? (
-                      <textarea
-                        name="comment"
-                        placeholder="Enter your long description here..."
-                        className="textarea textarea-bordered h-40"
-                        required
-                      ></textarea>
-                    ) : (
-                      <p className="text-red-500">
-                        You can't comment on your own post
-                      </p>
-                    )}
-                  </div>
-                  <button>Update Blog</button>
-
-               
-                </div>
+              <div className="flex items-center mb-4">
+                <img
+                  src={postedByPhoto}
+                  alt={postedBy}
+                  className="w-12 h-12 rounded-full mr-4"
+                />
                 <div>
-                  <h1>Commented by</h1>
-                  <p className="text-gray-600">
-                    Commentator Name: {currentUserName}
-                  </p>
-                  <p className="text-gray-600">
-                    Commentator Email: {currentEmail}
-                  </p>
-                  <img
-                    className="w-10 rounded-full"
-                    src={currentPhoto}
-                    alt=""
-                  />
+                  <p className="text-gray-600 font-semibold">{postedBy}</p>
+                  <p className="text-sm text-gray-500">{email}</p>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                <div className="form-control mt-6">
-                  {currentEmail !== email ? (
-                    <button className="btn btn-primary">Post a Comment</button>
-                  ) : (
-                    <NavLink to={`/updateBlog/${_id}`}>
-                      <button
-                        className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 flex items-center px-2 py-1 rounded"
-                        title="Update Review"
-                      >
-                        Update Blog
-                      </button>
-                    </NavLink>
-                  )}
+          <div className="mb-8">
+            <p className="text-lg text-gray-800">{longDescription}</p>
+          </div>
+
+          <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4">Post a Comment</h2>
+            {currentEmail !== email ? (
+              <form onSubmit={handleComment}>
+                <textarea
+                  name="comment"
+                  placeholder="Enter your comment here..."
+                  className="textarea textarea-bordered w-full h-32 mb-4"
+                  required
+                />
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center space-x-2">
+                    <img
+                      src={currentPhoto}
+                      alt={currentUserName}
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <p className="text-gray-600">{currentUserName}</p>
+                  </div>
+                  <button className="btn btn-primary px-6 py-2 text-white rounded-md hover:bg-blue-600">
+                    Post Comment
+                  </button>
                 </div>
               </form>
-            </div>
+            ) : (
+              <p className="text-red-500">
+                You cannot comment on your own post.
+              </p>
+            )}
+          </div>
+
+          <div className="mt-8">
+            {currentEmail === email && (
+              <NavLink to={`/updateBlog/${_id}`}>
+                <button className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 mt-4">
+                  Update Blog
+                </button>
+              </NavLink>
+            )}
           </div>
         </div>
       </main>

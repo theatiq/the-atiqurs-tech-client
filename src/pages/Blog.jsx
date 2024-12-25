@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { AiFillStar } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -26,7 +25,7 @@ const Blog = ({ reviews }) => {
     longDescription,
     postedDate,
     email: user?.email,
-    timestamp: new Date().toLocaleString,
+    timestamp: new Date().toLocaleString(),
   };
 
   const handleAddWishList = () => {
@@ -50,41 +49,50 @@ const Blog = ({ reviews }) => {
       });
   };
 
-  if (!reviews) return <Loading></Loading>;
+  if (!reviews) return <p>Loading...</p>;
 
   return (
-    <div className="card bg-base-100 border-1 review-card">
-      <figure className="px-5 pt-5">
-        <img
-          src={image}
-          alt="image"
-          className="rounded-lg h-[200px] w-full object-cover"
-        />
-      </figure>
-      <div className="card-body items-center text-center">
-        <h2 className="card-title">{title}</h2>
-        <p>Category: {category}</p>
-        {/* <p>Rating: {rating}</p>
-        <div className="flex items-center">
-          {[...Array(5)].map((_, i) => (
-            <AiFillStar
-              key={i}
-              className={`text-yellow-500 ${
-                i < Math.round(rating) ? "" : "opacity-50"
-              }`}
-            />
-          ))}
-        </div> */}
-        <p>Publishing Year: {postedDate}</p>
-        <p>Short Description: {shortDescription}</p>
+    <div className="max-w-4xl mx-auto my-10 p-5 border rounded-lg shadow-md bg-white">
+      <div className="grid md:grid-cols-2 gap-5">
+        {/* Left Section with Image */}
+        <div>
+          <img
+            src={image}
+            alt="Blog Post"
+            className="w-full h-[300px] object-cover rounded-lg"
+          />
+        </div>
+
+        {/* Right Section with Text */}
+        <div className="flex flex-col justify-center">
+          <h2 className="text-2xl font-bold text-indigo-700">{title}</h2>
+          <p className="mt-2 text-gray-600">
+            <span className="font-semibold">Category:</span> {category}
+          </p>
+          <p className="mt-2 text-gray-600">
+            <span className="font-semibold">Publishing Date:</span> {postedDate}
+          </p>
+          <p className="mt-4 text-gray-800 leading-relaxed">
+            {longDescription}
+          </p>
+        </div>
       </div>
 
-      <NavLink to={`/blogs/${_id}`} className="btn mb-5 mx-5">
-        Explore Details
-      </NavLink>
-      <button onClick={handleAddWishList} className="btn">
-        Add to Wishlist
-      </button>
+      {/* Call-to-Action Buttons */}
+      <div className="mt-5 flex justify-between items-center">
+        <NavLink
+          to={`/blogs/${_id}`}
+          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200"
+        >
+          Explore Details
+        </NavLink>
+        <button
+          onClick={handleAddWishList}
+          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+        >
+          Add to Wishlist
+        </button>
+      </div>
     </div>
   );
 };

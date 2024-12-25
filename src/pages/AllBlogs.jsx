@@ -6,7 +6,6 @@ import { FcSearch } from "react-icons/fc";
 const AllBlogs = () => {
   const allBlogs = useLoaderData();
   const [filteredBlogs, setFilteredBlogs] = useState(allBlogs);
-  // const [sortOption, setSortOption] = useState("");
   const [genreFilter, setGenreFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -26,40 +25,41 @@ const AllBlogs = () => {
       const filtered = allBlogs.filter((blog) =>
         blog.category.toLowerCase().includes(genre.toLowerCase())
       );
-      return setFilteredBlogs(filtered);
+      setFilteredBlogs(filtered);
     }
   };
 
   return (
-    <div className="p-5">
-      <h1 className="text-center text-3xl font-bold text-blue-950 mb-5">
-        All Blog Posts
+    <div className="p-5 bg-gray-50 min-h-screen">
+      {/* Page Title */}
+      <h1 className="text-center text-4xl font-extrabold text-blue-900 mb-10">
+        Explore Our Blogs
       </h1>
 
-      {/* Dropdown Menus */}
-      <div className="lg:flex justify-between items-center mb-5 space-y-5">
-        {/* Sorting Dropdown */}
-        <div className="flex justify-center my-5">
+      {/* Search and Filter Section */}
+      <div className="flex flex-col md:flex-row justify-between items-center bg-white p-4 shadow-md rounded-lg mb-8 space-y-4 md:space-y-0">
+        {/* Search Bar */}
+        <div className="flex items-center w-full md:w-1/2 relative">
           <input
             type="text"
             placeholder="Search by title..."
-            className="p-2 border rounded-lg w-1/2"
+            className="w-full p-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <FcSearch className="-translate-x-10 translate-y-2 text-2xl"/>
+          <FcSearch className="absolute right-3 text-2xl" />
         </div>
 
         {/* Filter Dropdown */}
-        <div className="">
-          <label htmlFor="filter" className="font-semibold mr-2">
+        <div className="w-full md:w-1/3">
+          <label htmlFor="filter" className="font-semibold text-gray-700 mr-2">
             Filter by Genre:
           </label>
           <select
             id="filter"
             value={genreFilter}
             onChange={(e) => handleFilter(e.target.value)}
-            className="border p-2 rounded w-[170px]"
+            className="w-full p-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">All</option>
             <option value="Tech News & Trends">Tech News & Trends</option>
@@ -68,7 +68,6 @@ const AllBlogs = () => {
             </option>
             <option value="Gadgets & Reviews">Gadgets & Reviews</option>
             <option value="How-To Guides & Tutorials">
-              {" "}
               How-To Guides & Tutorials
             </option>
             <option value="Future of Tech">Future of Tech</option>
@@ -76,10 +75,15 @@ const AllBlogs = () => {
         </div>
       </div>
 
-      {/* Reviews Grid */}
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* Blog List */}
+      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
         {filteredBlogs.map((blog) => (
-          <Blog key={blog._id} reviews={blog}></Blog>
+          <div
+            key={blog._id}
+            className="bg-white shadow-md rounded-lg p-6 border hover:shadow-lg transition-shadow duration-200"
+          >
+            <Blog reviews={blog} />
+          </div>
         ))}
       </div>
     </div>
