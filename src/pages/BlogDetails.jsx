@@ -59,6 +59,7 @@ const BlogDetails = () => {
             confirmButtonText: "Ok",
           });
           e.target.reset();
+          setCommentsData([...commentsData, commentData]);
         }
       });
   };
@@ -165,14 +166,31 @@ const BlogDetails = () => {
               </NavLink>
             )}
           </div>
-          <div>
-            {commentsData.map((comment) => (
-              <div>
-                <p>{comment.comment}</p>
-                <p>{comment.currentUserName}</p>
-                <img src={comment.currentPhoto} alt="" />
-              </div>
-            ))}
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Comments</h2>
+            <div className="space-y-4">
+              {commentsData.map((comment, index) => (
+                <div
+                  key={index}
+                  className="flex items-center bg-gray-100 p-4 rounded-lg shadow-md"
+                >
+                  <img
+                    src={comment.currentPhoto}
+                    alt={comment.currentUserName}
+                    className="w-12 h-12 rounded-full mr-4"
+                  />
+                  <div className="flex-1">
+                    <p className="text-lg font-medium text-blue-900">
+                      {comment.currentUserName}
+                    </p>
+                    <p className="text-gray-600">{comment.comment}</p>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    {new Date(comment.timestamp).toLocaleString()}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </main>
