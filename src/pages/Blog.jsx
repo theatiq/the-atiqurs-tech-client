@@ -52,7 +52,7 @@ const Blog = ({ reviews }) => {
   if (!reviews) return <p>Loading...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto my-10 p-5 border rounded-lg shadow-md bg-white">
+    <div className="max-w-4xl mx-auto my-5 p-5 border rounded-lg shadow-md bg-white">
       <div className="grid md:grid-cols-2 gap-5">
         {/* Left Section with Image */}
         <div>

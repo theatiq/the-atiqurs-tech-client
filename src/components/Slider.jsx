@@ -18,7 +18,7 @@ const Slider = () => {
   };
 
   return (
-    <div className="relative w-full h-[400px] overflow-hidden">
+    <div className="relative w-full h-[500px] overflow-hidden">
       {/* Background Image */}
       <img src={img2} className="w-full h-full object-cover" alt="Slide" />
 
