@@ -37,7 +37,10 @@ const FeaturedBlogs = () => {
         accessorKey: "longDescription",
         header: "Description",
         cell: (info) => (
-          <div className="truncate" title={info.getValue()}>
+          <div 
+            className="truncate description-cell" 
+            title={info.getValue()}
+          >
             {info.getValue()}
           </div>
         ),

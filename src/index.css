@@ -32,3 +32,15 @@ a.active {
   background-color: #000000;
   color: #ffffff;
 }
+
+.description-cell {
+  white-space: normal; /* Allows text to wrap */
+  overflow: hidden; /* Hides overflow for neatness */
+  text-overflow: ellipsis; /* Adds ellipsis if text is too long */
+  max-height: 4.5em; /* Set maximum height (adjust as needed) */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  font-size: 14px; /* Adjust font size if needed */
+  line-height: 1.5; /* Adjust line spacing for readability */
+}
