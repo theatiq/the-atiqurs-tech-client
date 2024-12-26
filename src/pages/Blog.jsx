@@ -73,7 +73,7 @@ const Blog = ({ reviews }) => {
             <span className="font-semibold">Publishing Date:</span> {postedDate}
           </p>
           <p className="mt-4 text-gray-800 leading-relaxed">
-            {longDescription}
+            Short Dercription: {shortDescription}
           </p>
         </div>
       </div>
