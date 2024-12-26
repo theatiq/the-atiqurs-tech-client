@@ -96,17 +96,18 @@ const Home = () => {
 
   const ads = [
     {
+      title: "Learn Complete Web Development",
+      content:
+        "Join our online coding bootcamp and transform your career in tech.",
+      img: "https://i.ibb.co.com/YQLTNFQ/Programming-hero.jpg",
+    },
+    {
       title: "Buy the Best Tech Gadgets",
       content:
         "Discover the latest gadgets and exclusive discounts. Don't miss out!",
-      img: "https://via.placeholder.com/300x200",
+      img: "https://i.ibb.co.com/6nQrtJd/Gadget.png",
     },
-    {
-      title: "Learn Programming",
-      content:
-        "Join our online coding bootcamp and transform your career in tech.",
-      img: "https://via.placeholder.com/300x200",
-    },
+
     {
       title: "Buy the Best Tech Gadgets",
       content:
