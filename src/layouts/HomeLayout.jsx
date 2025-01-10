@@ -10,7 +10,7 @@ const HomeLayout = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   return (
     <div className={`font-poppins ${isDarkMode ? "dark-mode" : "light-mode"}`}>
-      <header className="w-12/12 mx-auto sticky z-50 top-0 opacity-90">
+      <header className="sticky z-50 top-0 opacity-90">
         <Navbar></Navbar>
         {/* <div>
           <DarkModeToggle

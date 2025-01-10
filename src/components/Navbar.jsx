@@ -60,7 +60,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-lg">
-      <div className="navbar text-white max-w-7xl mx-auto px-4 py-2">
+      <div className="navbar text-white mx-auto px-4 py-2">
         {/* Navbar Start */}
         <div className="navbar-start">
           <div className="dropdown">
@@ -92,7 +92,7 @@ const Navbar = () => {
             className="flex items-center gap-2 text-lg font-semibold text-teal-400"
           >
             <img className="w-8 rounded-full" src={imageIcon} alt="Logo" />
-            Atiqur's Tech
+            <div className="hidden md:flex lg:flex">Atiqur's Tech</div>
           </Link>
         </div>
 
@@ -132,13 +132,13 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
               <button
                 onClick={handleGoogleLogin}
                 className="btn btn-sm flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white"
               >
                 <FcGoogle />
-                Sign In
+                
               </button>
               <NavLink
                 to={"/auth/login"}
