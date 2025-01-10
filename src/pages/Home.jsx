@@ -5,10 +5,23 @@ import DarkModeToggle from "react-dark-mode-toggle";
 import { Typewriter } from "react-simple-typewriter";
 import Blog from "./Blog";
 import Swal from "sweetalert2";
+import { parse } from "date-fns";
 
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const allBlogs = useLoaderData();
+  console.log(allBlogs);
+  // const latestBlogs = allBlogs
+  //   .sort((a, b) => new Date(b.postedDate) - new Date(a.date)) // Sort by date descending
+  //   .slice(0, 6); // Get the latest 6 blogs
+
+  const latestBlogs = allBlogs
+    .sort(
+      (a, b) =>
+        parse(b.postedDate, "MM/dd/yyyy, h:mm:ss a", new Date()) -
+        parse(a.postedDate, "MM/dd/yyyy, h:mm:ss a", new Date())
+    )
+    .slice(0, 6);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -67,16 +80,7 @@ const Home = () => {
       content:
         "Clear unused intervals, listeners, and variables to prevent memory overflow.",
     },
-    {
-      title: "Responsive Design Tip",
-      content:
-        "Use relative units like `em`, `%`, and `rem` instead of fixed units like `px` for scalable designs.",
-    },
-    {
-      title: "Database Optimization",
-      content:
-        "Use indexing on frequently queried fields to speed up database read operations.",
-    },
+
     {
       title: "Email Testing",
       content:
@@ -216,7 +220,7 @@ const Home = () => {
             Recent Blog Posts
           </h1>
           <div className="">
-            {allBlogs.map((blog) => (
+            {latestBlogs.map((blog) => (
               <div key={blog._id}>
                 <Blog reviews={blog} />
               </div>

@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
         loader: () =>
-          fetch("https://assignment-11-atiqur-server.vercel.app/blogsHome"),
+          fetch("https://assignment-11-atiqur-server.vercel.app/blogs"),
       },
       {
         path: "/addBlog",
