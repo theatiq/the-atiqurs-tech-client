@@ -23,74 +23,84 @@ const Home = () => {
   // Sample Tech Tips and Ads data
   const techTips = [
     {
-      title: "CSS Tip: Centering Divs",
+      title: "Optimize Website Performance",
       content:
-        "Use `display: flex; justify-content: center; align-items: center;` for easy centering.",
+        "Minimize the use of large images and enable Gzip compression to improve site speed.",
     },
     {
-      title: "Debugging with Console",
+      title: "Version Control Shortcut",
       content:
-        "Use `console.table()` to print arrays or objects in an easy-to-read tabular format.",
+        "Use `git stash` to save uncommitted changes temporarily and switch branches easily.",
     },
     {
-      title: "Master Git Commands",
+      title: "Debugging API Calls",
       content:
-        "Use `git log --oneline` to view a concise list of your commits.",
+        "Use Postman or Insomnia to test API endpoints before integrating them into your app.",
     },
     {
-      title: "CSS Tip: Centering Divs",
+      title: "Enhance Code Readability",
       content:
-        "Use `display: flex; justify-content: center; align-items: center;` for easy centering.",
+        "Follow consistent naming conventions and use descriptive variable names.",
     },
     {
-      title: "Debugging with Console",
+      title: "Keyboard Shortcut for Productivity",
       content:
-        "Use `console.table()` to print arrays or objects in an easy-to-read tabular format.",
+        "In VS Code, press `Ctrl + D` to select the next occurrence of a word and edit multiple instances.",
     },
     {
-      title: "Master Git Commands",
+      title: "Secure Your Applications",
       content:
-        "Use `git log --oneline` to view a concise list of your commits.",
+        "Always use environment variables to store API keys and secrets, and avoid committing them to Git.",
     },
     {
-      title: "CSS Tip: Centering Divs",
+      title: "Cross-Browser Testing",
       content:
-        "Use `display: flex; justify-content: center; align-items: center;` for easy centering.",
+        "Use tools like BrowserStack or LambdaTest to ensure your app works on multiple browsers and devices.",
     },
     {
-      title: "Debugging with Console",
+      title: "CSS Performance Tip",
       content:
-        "Use `console.table()` to print arrays or objects in an easy-to-read tabular format.",
+        "Place commonly used styles higher in your stylesheet for better rendering performance.",
     },
     {
-      title: "Master Git Commands",
+      title: "Avoid Memory Leaks in JavaScript",
       content:
-        "Use `git log --oneline` to view a concise list of your commits.",
+        "Clear unused intervals, listeners, and variables to prevent memory overflow.",
     },
     {
-      title: "CSS Tip: Centering Divs",
+      title: "Responsive Design Tip",
       content:
-        "Use `display: flex; justify-content: center; align-items: center;` for easy centering.",
+        "Use relative units like `em`, `%`, and `rem` instead of fixed units like `px` for scalable designs.",
     },
     {
-      title: "Debugging with Console",
+      title: "Database Optimization",
       content:
-        "Use `console.table()` to print arrays or objects in an easy-to-read tabular format.",
+        "Use indexing on frequently queried fields to speed up database read operations.",
     },
     {
-      title: "Debugging with Console",
+      title: "Email Testing",
       content:
-        "Use `console.table()` to print arrays or objects in an easy-to-read tabular format.",
+        "Use services like Mailtrap to test email functionality without sending emails to real users.",
     },
     {
-      title: "Debugging with Console",
+      title: "Code Documentation",
       content:
-        "Use `console.table()` to print arrays or objects in an easy-to-read tabular format.",
+        "Use JSDoc or similar tools to generate documentation directly from your comments.",
     },
     {
-      title: "Debugging with Console",
+      title: "Cross-Browser Testing",
       content:
-        "Use `console.table()` to print arrays or objects in an easy-to-read tabular format.",
+        "Use tools like BrowserStack or LambdaTest to ensure your app works on multiple browsers and devices.",
+    },
+    {
+      title: "RESTful API Design",
+      content:
+        "Keep your endpoints consistent and predictable by following REST conventions.",
+    },
+    {
+      title: "Secure Passwords",
+      content:
+        "Implement bcrypt or a similar hashing algorithm to securely store passwords in your database.",
     },
   ];
 
@@ -109,40 +119,34 @@ const Home = () => {
     },
 
     {
-      title: "Buy the Best Tech Gadgets",
+      title: "Learn Computer Science",
       content:
-        "Discover the latest gadgets and exclusive discounts. Don't miss out!",
-      img: "https://via.placeholder.com/300x200",
+        "Udemy, Inc. is an education technology company, founded in May 2010 by Eren Bali, Gagan Biyani, and Oktay Caglar. It is based in San Francisco, California",
+      img: "https://i.ibb.co.com/jVC578Z/udemy.jpg",
     },
     {
       title: "Learn Programming",
       content:
-        "Join our online coding bootcamp and transform your career in tech.",
-      img: "https://via.placeholder.com/300x200",
+        "Learn Data Science & AI from the comfort of your browser, at your own pace with DataCamp's video tutorials & coding challenges on R, Python, Statistics & more.",
+      img: "https://i.ibb.co.com/5hC42HF/data.webp",
     },
     {
-      title: "Buy the Best Tech Gadgets",
+      title: "Learn Everything",
       content:
-        "Discover the latest gadgets and exclusive discounts. Don't miss out!",
-      img: "https://via.placeholder.com/300x200",
-    },
-    {
-      title: "Learn Programming",
-      content:
-        "Join our online coding bootcamp and transform your career in tech.",
-      img: "https://via.placeholder.com/300x200",
-    },
-    {
-      title: "Buy the Best Tech Gadgets",
-      content:
-        "Discover the latest gadgets and exclusive discounts. Don't miss out!",
-      img: "https://via.placeholder.com/300x200",
+        "Khan Academy is an American non-profit educational organization created in 2006 by Sal Khan. Its goal is to create a set of online tools that help educate students.",
+      img: "https://i.ibb.co.com/rwvvRvB/khan.png",
     },
     {
       title: "Learn Programming",
       content:
-        "Join our online coding bootcamp and transform your career in tech.",
-      img: "https://via.placeholder.com/300x200",
+        "edX is a US for-profit online education platform owned by 2U since 2021.",
+      img: "https://i.ibb.co.com/LJJ7vhM/edx.png",
+    },
+    {
+      title: "Learn skills by sharing",
+      content:
+        "Skillshare is an online learning community based in the United States that provides educational videos.",
+      img: "https://i.ibb.co.com/hyW3T4W/skill.png",
     },
   ];
 
@@ -151,7 +155,7 @@ const Home = () => {
       className={`w-full mx-auto ${isDarkMode ? "dark-mode" : "light-mode"}`}
     >
       {/* Dark Mode Toggle */}
-      <div className="flex justify-end mb-3">
+      {/* <div className="flex justify-end mb-3">
         <DarkModeToggle
           onChange={setIsDarkMode}
           checked={isDarkMode}
@@ -160,10 +164,10 @@ const Home = () => {
         <p className="text-sm ml-3">
           {isDarkMode ? "Dark Mode" : "Light Mode"}
         </p>
-      </div>
+      </div> */}
 
       {/* Typewriter */}
-      <div className="text-center mb-5">
+      {/* <div className="text-center mb-5">
         <span
           style={{ color: "blueviolet" }}
           className="text-4xl font-semibold"
@@ -178,7 +182,7 @@ const Home = () => {
             delaySpeed={1000}
           />
         </span>
-      </div>
+      </div> */}
 
       <Banner />
 
