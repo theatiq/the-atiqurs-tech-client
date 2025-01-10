@@ -22,7 +22,7 @@ const HomeLayout = () => {
         </div> */}
         {/* <Welcome></Welcome> */}
       </header>
-      <main className="w-12/12 mx-auto mb-5">
+      <main className="mb-5 min-h-screen">
         <Outlet></Outlet>
       </main>
       <footer>

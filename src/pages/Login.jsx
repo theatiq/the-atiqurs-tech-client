@@ -6,18 +6,17 @@ import { FaEyeLowVision } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import { EmailContext } from "../providers/EmailProvider";
 import Swal from "sweetalert2";
+import loginImg from "../assets/login.jpg"
 
 const Login = () => {
-  // const emailRef = useRef();
   const [email, setEmail] = useContext(EmailContext);
-  // const [email, setEmail] = useState("");
-
   const [success, setSuccess] = useState(false);
   const [logInError, setLogInError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { signIn, setUser, handleForgot } = useContext(AuthContext);
+  const { signIn, setUser } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -26,6 +25,7 @@ const Login = () => {
     const password = form.password.value;
     setSuccess(false);
     setLogInError("");
+
     signIn(email, password)
       .then((result) => {
         const user = result.user;
@@ -40,48 +40,36 @@ const Login = () => {
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        // alert(error.code);
         setLogInError(error.message);
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "User name or Password Mismatch",
+          text: "Username or Password Mismatch",
           footer:
-            '<a href="#">Put User name and Password correctly and try again</a>',
+            '<a href="#">Put username and password correctly and try again</a>',
         });
       });
   };
 
-  const handleForgotPassword = (e) => {
-    e.preventDefault();
-    if (!email) {
-      alert("Please provide your email address to reset the password.");
-      return;
-    }
-    navigate("/auth/forget", { state: { email } }); // Navigate with email
-  };
-
   const handleEmailChange = (e) => {
-    setEmail(e.target.value); // Update email in context
+    setEmail(e.target.value);
   };
-
-  // const handleEmail = () => {
-
-  //   const email = emailRef.current.value;
-  //   if (!email) {
-
-  //   } else {
-  //     handleForgot(email).then(() => {
-  //       toast.success("Reset Link sent to your email.");
-  //     });
-  //   }
-  // };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-10">
-        <h2 className="text-2xl font-semibold text-center">
-          Login your account
+    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 lg:px-10">
+      {/* Left Side: Image */}
+      <div className="flex lg:block w-full lg:w-1/2">
+        <img
+          src={loginImg} // Replace with your image URL
+          alt="Login Illustration"
+          className="w-full h-auto object-cover"
+        />
+      </div>
+
+      {/* Right Side: Form */}
+      <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-10 lg:w-1/2">
+        <h2 className="text-2xl font-semibold text-center mb-5">
+          Login to Your Account
         </h2>
         <form onSubmit={handleSubmit} className="card-body">
           <div className="form-control">
@@ -91,7 +79,6 @@ const Login = () => {
             <input
               type="email"
               name="email"
-              // ref={emailRef}
               placeholder="email"
               className="input input-bordered"
               required
@@ -111,39 +98,26 @@ const Login = () => {
               required
             />
             <button
-              onClick={() => {
-                setShowPassword(!showPassword);
-              }}
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
               className="btn btn-xs absolute right-4 top-12"
             >
               {showPassword ? <FaEyeLowVision /> : <IoEyeSharp />}
             </button>
-            {/* <div className="form-control mt-6">
-              <button
-                onClick={handleForgotPassword}
-                className="btn btn-ghost rounded-none"
-              >
-                Forgot password?
-              </button>
-            </div> */}
-
-            {/* <label className="label form-control">
-              <a href="" className="label-text-alt link link-hover">
-                Forgot password?
-              </a>
-            </label> */}
           </div>
           <div className="form-control mt-6">
             <button className="btn btn-neutral rounded-none">Login</button>
           </div>
         </form>
         {success && (
-          <p className="text-green-500">User Logged in successfully</p>
+          <p className="text-green-500 text-center">
+            User Logged in Successfully
+          </p>
         )}
-        {logInError && <p className="text-red-600">{logInError}</p>}
-        <p className="text-center font-semibold">
+        {logInError && <p className="text-red-600 text-center">{logInError}</p>}
+        <p className="text-center font-semibold mt-4">
           Don't have an account?{" "}
-          <Link className="text-red-500" to={"/auth/register"}>
+          <Link className="text-red-500" to="/auth/register">
             Register
           </Link>
         </p>

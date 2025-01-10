@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeLowVision } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import registerImg from "../assets/register.jpg";
 
 const Register = () => {
   const { createNewUser, setUser, updateUserProfile } = useContext(AuthContext);
@@ -12,31 +13,29 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const name = form.get("name");
-    // if (name.length < 5) {
-    //   setError({ ...error, name: "must be more than 5" });
-    //   return;
-    // }
     const email = form.get("email");
     const photo = form.get("photo");
     const password = form.get("password");
     const conPassword = form.get("conPassword");
+
     if (password.length < 6) {
-      setErrorMessage("Password should be 6 character or long");
+      setErrorMessage("Password should be at least 6 characters long");
       return;
     }
     if (password !== conPassword) {
-      setErrorMessage("Confirmed Password not matched with your Password");
+      setErrorMessage("Confirmed password does not match");
       return;
     }
     const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     if (!regex.test(password)) {
       setErrorMessage(
-        "Password should have  at least 1 uppercase 1 lower case 1 number 1 special character min length 6"
+        "Password must have at least 1 uppercase, 1 lowercase, 1 number, and 1 special character"
       );
       return;
     }
@@ -54,9 +53,7 @@ const Register = () => {
           icon: "success",
         });
         updateUserProfile({ displayName: name, photoURL: photo })
-          .then(() => {
-            navigate("/");
-          })
+          .then(() => navigate("/"))
           .catch((err) => {});
       })
       .catch((error) => {
@@ -66,10 +63,20 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-10">
-        <h2 className="text-2xl font-semibold text-center">
-          Register your account
+    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 lg:px-10">
+      {/* Left Side: Image */}
+      <div className="lg:w-1/2 h-48 lg:h-auto">
+        <img
+          className="w-full h-full object-cover"
+          src={registerImg}
+          alt="Register"
+        />
+      </div>
+
+      {/* Right Side: Form */}
+      <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-10 lg:w-1/2">
+        <h2 className="text-2xl font-semibold text-center mb-5">
+          Register Your Account
         </h2>
         <form onSubmit={handleSubmit} className="card-body">
           <div className="form-control">
@@ -79,15 +86,11 @@ const Register = () => {
             <input
               type="text"
               name="name"
-              placeholder="name"
+              placeholder="Name"
               className="input input-bordered"
               required
             />
           </div>
-
-          {error.name && (
-            <label className="label text-xs text-red-500">{error.name}</label>
-          )}
 
           <div className="form-control">
             <label className="label">
@@ -96,7 +99,7 @@ const Register = () => {
             <input
               type="text"
               name="photo"
-              placeholder="photo-url"
+              placeholder="Photo URL"
               className="input input-bordered"
               required
             />
@@ -109,11 +112,12 @@ const Register = () => {
             <input
               type="email"
               name="email"
-              placeholder="email"
+              placeholder="Email"
               className="input input-bordered"
               required
             />
           </div>
+
           {/* Main Password */}
           <div className="form-control relative">
             <label className="label">
@@ -122,19 +126,19 @@ const Register = () => {
             <input
               type={showPassword ? "text" : "password"}
               name="password"
-              placeholder="password"
+              placeholder="Password"
               className="input input-bordered"
               required
             />
             <button
-              onClick={() => {
-                setShowPassword(!showPassword);
-              }}
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
               className="btn btn-xs absolute right-4 top-12"
             >
               {showPassword ? <FaEyeLowVision /> : <IoEyeSharp />}
             </button>
           </div>
+
           {/* Confirm Password */}
           <div className="form-control relative">
             <label className="label">
@@ -143,20 +147,12 @@ const Register = () => {
             <input
               type={showPassword ? "text" : "password"}
               name="conPassword"
-              placeholder="confirm password"
+              placeholder="Confirm Password"
               className="input input-bordered"
               required
             />
-            <button
-              onClick={() => {
-                setShowPassword(!showPassword);
-              }}
-              className="btn btn-xs absolute right-4 top-12"
-            >
-              {showPassword ? <FaEyeLowVision /> : <IoEyeSharp />}
-            </button>
-         
           </div>
+
           <div className="form-control mt-6">
             <button className="btn btn-neutral rounded-none">Register</button>
           </div>
@@ -165,10 +161,12 @@ const Register = () => {
         {errorMessage && (
           <p className="text-red-500 text-center">{errorMessage}</p>
         )}
-        {success && <p className="text-green-500">Registration successful</p>}
-        <p className="text-center font-semibold">
+        {success && (
+          <p className="text-green-500 text-center">Registration successful</p>
+        )}
+        <p className="text-center font-semibold mt-4">
           Already have an account?{" "}
-          <Link className="text-red-500" to={"/auth/login"}>
+          <Link className="text-red-500" to="/auth/login">
             Login
           </Link>
         </p>
