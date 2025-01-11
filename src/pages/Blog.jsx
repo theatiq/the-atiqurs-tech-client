@@ -79,22 +79,22 @@ const Blog = ({ reviews }) => {
       </div>
 
       {/* Call-to-Action Buttons */}
-      <div className="mt-5 flex justify-between items-center">
+      <div className="mt-5 flex justify-between items-center gap-2">
         <NavLink
           to={`/blogs/${_id}`}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200"
+          className="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 transition duration-200"
         >
           Explore Details
         </NavLink>
         {user?.email ? (
           <button
             onClick={handleAddWishList}
-            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200"
+            className="bg-purple-600 text-white p-2 rounded-lg hover:bg-green-700 transition duration-200"
           >
             Add to Wishlist
           </button>
         ) : (
-          <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+          <button className="bg-purple-600 text-white p-2 rounded-lg hover:bg-green-700 transition duration-200">
             Add to Wishlist
           </button>
         )}
